@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="113d76fb-6def-4314-b3a5-ab6f4fc44fe3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Homework_02/out/production/Homework_02/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet$1.class" afterPath="$PROJECT_DIR$/../Homework_02/out/production/Homework_02/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Homework_02/out/production/Homework_02/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet$2.class" afterPath="$PROJECT_DIR$/../Homework_02/out/production/Homework_02/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Homework_02/out/production/Homework_02/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet.class" afterPath="$PROJECT_DIR$/../Homework_02/out/production/Homework_02/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Homework_01/ru/ifmo/ctddev/gizatullin/walk/RecursiveWalk$1.class" afterPath="$PROJECT_DIR$/out/production/Homework_01/ru/ifmo/ctddev/gizatullin/walk/RecursiveWalk$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Homework_01/ru/ifmo/ctddev/gizatullin/walk/RecursiveWalk.class" afterPath="$PROJECT_DIR$/out/production/Homework_01/ru/ifmo/ctddev/gizatullin/walk/RecursiveWalk.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Homework_02/src/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet.java" afterPath="$PROJECT_DIR$/../Homework_02/src/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Homework_01.iml" afterPath="$PROJECT_DIR$/Homework_01.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/walk/RecursiveWalk.java" afterPath="$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/walk/RecursiveWalk.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Homework_02/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Homework_02/.idea/workspace.xml" />
     </list>
@@ -40,51 +33,11 @@
       <file leaf-file-name="RecursiveWalk.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/walk/RecursiveWalk.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2631579" vertical-offset="0" max-vertical-offset="1513">
-              <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.078947365" vertical-offset="799" max-vertical-offset="1513">
+              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test01_oneEmptyFile.in" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/__Test__Walk__/test01_oneEmptyFile.in">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119">
-              <caret line="0" column="65" selection-start-line="0" selection-start-column="65" selection-end-line="0" selection-end-column="65" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test01_oneEmptyFile.out" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/__Test__Walk__/test01_oneEmptyFile.out">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test14_doubleRecursion.in" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/__Test__Walk__/test14_doubleRecursion.in">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test14_doubleRecursion.out" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/__Test__Walk__/test14_doubleRecursion.out">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="816">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -461,6 +414,13 @@
       <option name="number" value="Default" />
       <updated>1424207722508</updated>
     </task>
+    <task id="LOCAL-00001" summary="Updated">
+      <created>1424956907830</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1424956907830</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -511,6 +471,8 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/tests" />
     </ignored-roots>
+    <MESSAGE value="Updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -887,6 +849,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/nio/file/Files.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5276461" vertical-offset="44784" max-vertical-offset="63036">
+          <caret line="2739" column="19" selection-start-line="2739" selection-start-column="19" selection-end-line="2739" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/持問中請程中中序持你國的序國請序支支程的問你的序問持支請請中">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="239">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/__Test__Walk__/test14_doubleRecursion.out">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3315">
@@ -899,14 +877,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/nio/file/Files.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5276461" vertical-offset="44784" max-vertical-offset="63036">
-          <caret line="2739" column="19" selection-start-line="2739" selection-start-column="19" selection-end-line="2739" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -927,18 +897,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/持問中請程中中序持你國的序國請序支支程的問你的序問持支請請中">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="239">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/walk/RecursiveWalk.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2631579" vertical-offset="0" max-vertical-offset="1513">
-          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.078947365" vertical-offset="799" max-vertical-offset="1513">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

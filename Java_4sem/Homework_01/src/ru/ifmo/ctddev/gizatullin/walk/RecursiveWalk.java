@@ -42,7 +42,7 @@ public class RecursiveWalk {
             Files.walkFileTree(startPath, new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
-                    print(getHash(file.toFile()) + " " + file.toString() + '\n', osWriter);
+                    print(anakinFileWalker(file.toFile()) + " " + file.toString() + '\n', osWriter);
                     return FileVisitResult.CONTINUE;
                 }
 
@@ -57,7 +57,7 @@ public class RecursiveWalk {
         }
     }
 
-    static String getHash(File file) {
+    static String anakinFileWalker(File file) {
         try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file), BUFF_SIZE)) {
             int hash = INIT_HASH;
             byte[] bytes = new byte[BUFF_SIZE];

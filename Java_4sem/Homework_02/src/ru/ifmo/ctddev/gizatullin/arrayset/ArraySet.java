@@ -123,9 +123,6 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
 
     @Override
     public Iterator<T> iterator() {
-        if (reversed){
-            return descendingIterator();
-        }
         return new Iterator<T>() {
             private int curIndex = 0;
 
@@ -176,10 +173,6 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
 
     @Override
     public Iterator<T> descendingIterator() {
-        if (reversed){
-            return iterator();
-        }
-
         return new Iterator<T>() {
             private int curIndex = a.size();
 
@@ -200,15 +193,12 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
         /*if (fromElement == null || toElement == null) {
             return new ArraySet<>(comparator, naturalOrder);
             //throw new NullPointerException();
-        }
-
-        if (comparator != null && comparator.compare(fromElement, toElement) > 0) {
-            return new ArraySet<>(comparator, naturalOrder);
-//            throw new IllegalArgumentException();
         }*/
-        if (reversed){
 
-        }
+        /*
+        if (comparator.compare(fromElement, toElement) > 0) {
+            throw new IllegalArgumentException();
+        }*/
 
         int from = Collections.binarySearch(a, fromElement, comparator);
         int to = Collections.binarySearch(a, toElement, comparator);
@@ -252,25 +242,16 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
 
     @Override
     public SortedSet<T> subSet(T fromElement, T toElement) {
-        if (reversed){
-            return subSet(toElement, false, fromElement, true);
-        }
         return subSet(fromElement, true, toElement, false);
     }
 
     @Override
     public SortedSet<T> headSet(T toElement) {
-        if (reversed){
-            tailSet(toElement, false);
-        }
         return headSet(toElement, false);
     }
 
     @Override
     public SortedSet<T> tailSet(T fromElement) {
-        if (reversed){
-            return headSet(fromElement, true);
-        }
         return tailSet(fromElement, true);
     }
 
@@ -279,9 +260,9 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
-        if (reversed){
+        /*if (reversed){
             return a.get(a.size() - 1);
-        }
+        }*/
         return a.get(0);
     }
 
@@ -290,9 +271,9 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
-        if (reversed){
+        /*if (reversed){
             return a.get(0);
-        }
+        }*/
         return a.get(a.size() - 1);
     }
 
@@ -303,6 +284,11 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
 
     @Override
     public T pollLast() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void clear(){
         throw new UnsupportedOperationException();
     }
 }
