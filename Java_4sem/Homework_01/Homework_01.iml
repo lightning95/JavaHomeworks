@@ -28,7 +28,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/tests/walk/WalkTest.jar!/" />
+          <root url="jar://$MODULE_DIR$/tests/artifacts/WalkTest.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

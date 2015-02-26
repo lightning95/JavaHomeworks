@@ -2,10 +2,11 @@ package ru.ifmo.ctddev.gizatullin.arrayset;
 
 import java.util.*;
 
-public class ArraySet<T> implements NavigableSet<T> {
+public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
     private List<T> a;
     private Comparator<? super T> comparator;
     private boolean naturalOrder;
+    private boolean reversed;
 
     public ArraySet() {
         a = new ArrayList<>(0);
@@ -41,10 +42,11 @@ public class ArraySet<T> implements NavigableSet<T> {
         naturalOrder = true;
     }
 
-    private ArraySet(List<T> list, Comparator<? super T> comparator, boolean naturalOrder) {
+    private ArraySet(List<T> list, Comparator<? super T> comparator, boolean naturalOrder, boolean reversed) {
         this.comparator = comparator;
         this.a = list;
         this.naturalOrder = naturalOrder;
+        this.reversed = reversed;
     }
 
     @Override
@@ -121,6 +123,9 @@ public class ArraySet<T> implements NavigableSet<T> {
 
     @Override
     public Iterator<T> iterator() {
+        if (reversed){
+            return descendingIterator();
+        }
         return new Iterator<T>() {
             private int curIndex = 0;
 
@@ -171,6 +176,10 @@ public class ArraySet<T> implements NavigableSet<T> {
 
     @Override
     public Iterator<T> descendingIterator() {
+        if (reversed){
+            return iterator();
+        }
+
         return new Iterator<T>() {
             private int curIndex = a.size();
 
@@ -197,6 +206,9 @@ public class ArraySet<T> implements NavigableSet<T> {
             return new ArraySet<>(comparator, naturalOrder);
 //            throw new IllegalArgumentException();
         }*/
+        if (reversed){
+
+        }
 
         int from = Collections.binarySearch(a, fromElement, comparator);
         int to = Collections.binarySearch(a, toElement, comparator);
@@ -220,7 +232,7 @@ public class ArraySet<T> implements NavigableSet<T> {
             --to;
         }
 
-        return new ArraySet<>(a.subList(from, Math.max(to + 1, from)), comparator, naturalOrder);
+        return new ArraySet<>(a.subList(from, Math.max(to + 1, from)), comparator, naturalOrder, reversed);
     }
 
     @Override
@@ -240,16 +252,25 @@ public class ArraySet<T> implements NavigableSet<T> {
 
     @Override
     public SortedSet<T> subSet(T fromElement, T toElement) {
+        if (reversed){
+            return subSet(toElement, false, fromElement, true);
+        }
         return subSet(fromElement, true, toElement, false);
     }
 
     @Override
     public SortedSet<T> headSet(T toElement) {
+        if (reversed){
+            tailSet(toElement, false);
+        }
         return headSet(toElement, false);
     }
 
     @Override
     public SortedSet<T> tailSet(T fromElement) {
+        if (reversed){
+            return headSet(fromElement, true);
+        }
         return tailSet(fromElement, true);
     }
 
@@ -258,6 +279,9 @@ public class ArraySet<T> implements NavigableSet<T> {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
+        if (reversed){
+            return a.get(a.size() - 1);
+        }
         return a.get(0);
     }
 
@@ -265,6 +289,9 @@ public class ArraySet<T> implements NavigableSet<T> {
     public T last() {
         if (isEmpty()) {
             throw new NoSuchElementException();
+        }
+        if (reversed){
+            return a.get(0);
         }
         return a.get(a.size() - 1);
     }
@@ -276,36 +303,6 @@ public class ArraySet<T> implements NavigableSet<T> {
 
     @Override
     public T pollLast() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends T> c) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void clear() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean add(T t) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean remove(Object o) {
         throw new UnsupportedOperationException();
     }
 }
