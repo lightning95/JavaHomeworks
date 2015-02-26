@@ -2,154 +2,143 @@ package ru.ifmo.ctddev.gizatullin.arrayset;
 
 import java.util.*;
 
-public class ArraySet<T> implements NavigableSet<T>, Iterable<T> {
+public class ArraySet<T> implements NavigableSet<T> {
     private List<T> a;
     private Comparator<? super T> comparator;
-    private int left;
-    private int right;
-
-    private ArraySet(List<T> list, Comparator<? super T> comparator, int left, int right) {
-        this.a = list;
-        this.comparator = comparator;
-        this.left = left;
-        this.right = right;
-    }
-
-    private ArraySet(Comparator<? super T> comparator) {
-        this.comparator = comparator;
-        a = new ArrayList<>(0);
-        left = 0;
-        right = 0;
-    }
+    private boolean naturalOrder;
 
     public ArraySet() {
         a = new ArrayList<>(0);
-        left = 0;
-        right = 0;
+        naturalOrder = true;
     }
 
     public ArraySet(Collection<T> collection, Comparator<? super T> comparator) {
         this.comparator = comparator;
-        left = 0;
         if (collection.isEmpty()) {
             a = new ArrayList<>(0);
-            right = 0;
         } else {
-            a = new ArrayList<>();
-            List<T> tmp = new ArrayList<>(collection);
-            Collections.sort(tmp, comparator);
-            T last = null;
-            for (T t : tmp) {
-                if (last == null || comparator != null && comparator.compare(t, last) != 0 ||
-                        comparator == null && ((Comparable<T>) t).compareTo(last) != 0) {
-                    last = t;
-                    a.add(t);
+            a = new ArrayList<>(collection);
+            Collections.sort(a, comparator);
+            int last = 0;
+            for (int i = 1; i < a.size(); ++i) {
+                if (comparator.compare(a.get(last), a.get(i)) != 0){
+                    a.set(++last, a.get(i));
                 }
             }
-            right = a.size();
+            while (a.size() > last + 1) {
+                a.remove(a.size() - 1);
+            }
         }
     }
 
     public ArraySet(Collection<T> collection) {
-        this(collection, null);
+        this(collection, new Comparator<T>() {
+            @Override
+            public int compare(T o1, T o2) {
+                return ((Comparable<T>) o1).compareTo(o2);
+            }
+        });
+        naturalOrder = true;
+    }
+
+    private ArraySet(List<T> list, Comparator<? super T> comparator, boolean naturalOrder) {
+        this.comparator = comparator;
+        this.a = list;
+        this.naturalOrder = naturalOrder;
     }
 
     @Override
     public T lower(T t) {
-        List<T> cur = a.subList(left, right);
-        int res = Collections.binarySearch(cur, t, comparator);
+        int res = Collections.binarySearch(a, t, comparator);
         if (res < 0) {
             res = -(res + 1);
         }
-        if (res > 0 && res <= cur.size()) {
-            return cur.get(res - 1);
+        if (res > 0 && res <= a.size()) {
+            return a.get(res - 1);
         }
         return null;
     }
 
     @Override
     public T floor(T t) {
-        List<T> cur = a.subList(left, right);
-        int res = Collections.binarySearch(cur, t, comparator);
-        if (res >= 0 && res < cur.size()) {
-            return cur.get(res);
+        int res = Collections.binarySearch(a, t, comparator);
+        if (res >= 0 && res < a.size()) {
+            return a.get(res);
         }
         if (res < 0) {
             res = -(res + 1);
         }
-        if (res > 0 && res <= cur.size()) {
-            return cur.get(res - 1);
+        if (res > 0 && res <= a.size()) {
+            return a.get(res - 1);
         }
         return null;
     }
 
     @Override
     public T ceiling(T t) {
-        List<T> cur = a.subList(left, right);
-        int res = Collections.binarySearch(cur, t, comparator);
+        int res = Collections.binarySearch(a, t, comparator);
         if (res < 0) {
             res = -(res + 1);
         }
-        if (res >= 0 && res < cur.size()) {
-            return cur.get(res);
+        if (res >= 0 && res < a.size()) {
+            return a.get(res);
         }
         return null;
     }
 
     @Override
     public T higher(T t) {
-        List<T> cur = a.subList(left, right);
-        int res = Collections.binarySearch(cur, t, comparator);
-        if (res + 1 == cur.size()) {
+        int res = Collections.binarySearch(a, t, comparator);
+        if (res + 1 == a.size()) {
             return null;
         }
-        if (res >= 0 && res + 1 < cur.size()) {
-            return cur.get(res + 1);
+        if (res >= 0 && res + 1 < a.size()) {
+            return a.get(res + 1);
         }
         if (res < 0) {
             res = -(res + 1);
         }
-        if (res >= 0 && res < cur.size()) {
-            return cur.get(res);
+        if (res >= 0 && res < a.size()) {
+            return a.get(res);
         }
         return null;
     }
 
     @Override
     public int size() {
-        return right - left;
+        return a.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return left == right;
+        return a.isEmpty();
     }
 
     @Override
     public boolean contains(Object o) {
-        return Collections.binarySearch(a.subList(left, right), (T) o, comparator) >= 0;
+        return Collections.binarySearch(a, (T) o, comparator) >= 0;
     }
 
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            private int currentIndex = left;
+            private int curIndex = 0;
 
             @Override
             public boolean hasNext() {
-                return currentIndex < right;
+                return curIndex < a.size();
             }
 
             @Override
             public T next() {
-                return a.get(currentIndex++);
+                return a.get(curIndex++);
             }
         };
     }
 
     @Override
     public Object[] toArray() {
-        return a.subList(left, right).toArray();
+        return a.toArray();
     }
 
     @Override
@@ -157,12 +146,7 @@ public class ArraySet<T> implements NavigableSet<T>, Iterable<T> {
         /* if (array == null){
             throw new NullPointerException();
         }*/
-        int size = size();
-        T1[] res = array.length >= size ? array :
-                (T1[]) java.lang.reflect.Array
-                        .newInstance(array.getClass().getComponentType(), size);
-
-        return a.subList(left, right).toArray(res);
+        return a.toArray(array);
     }
 
     @Override
@@ -179,7 +163,7 @@ public class ArraySet<T> implements NavigableSet<T>, Iterable<T> {
     public NavigableSet<T> descendingSet() {
         // TODO
         List<T> tmp = new ArrayList<>();
-        Collections.copy(tmp, a.subList(left, right));
+        Collections.copy(tmp, a);
         Collections.reverse(tmp);
 
         return new ArraySet<>(tmp, comparator);
@@ -188,38 +172,36 @@ public class ArraySet<T> implements NavigableSet<T>, Iterable<T> {
     @Override
     public Iterator<T> descendingIterator() {
         return new Iterator<T>() {
-            private int currentIndex = right;
+            private int curIndex = a.size();
 
             @Override
             public boolean hasNext() {
-                return currentIndex > left;
+                return curIndex > 0;
             }
 
             @Override
             public T next() {
-                return a.get(--currentIndex);
+                return a.get(--curIndex);
             }
         };
     }
 
     @Override
     public NavigableSet<T> subSet(T fromElement, boolean fromInclusive, T toElement, boolean toInclusive) {
-        if (fromElement == null || toElement == null) {
-            return new ArraySet<>(comparator);
+        /*if (fromElement == null || toElement == null) {
+            return new ArraySet<>(comparator, naturalOrder);
             //throw new NullPointerException();
         }
 
-        if (comparator != null && comparator.compare(fromElement, toElement) > 0 ||
-                comparator == null && ((Comparable<T>) fromElement).compareTo(toElement) > 0) {
-            return new ArraySet<>(comparator);
+        if (comparator != null && comparator.compare(fromElement, toElement) > 0) {
+            return new ArraySet<>(comparator, naturalOrder);
 //            throw new IllegalArgumentException();
-        }
+        }*/
 
-        List<T> cur = a.subList(left, right);
-        int from = Collections.binarySearch(cur, fromElement, comparator);
-        int to = Collections.binarySearch(cur, toElement, comparator);
+        int from = Collections.binarySearch(a, fromElement, comparator);
+        int to = Collections.binarySearch(a, toElement, comparator);
 
-        if (from >= 0 && from < cur.size()) {
+        if (from >= 0 && from < a.size()) {
             if (!fromInclusive) {
                 ++from;
             }
@@ -228,7 +210,7 @@ public class ArraySet<T> implements NavigableSet<T>, Iterable<T> {
             from = -(from + 1);
         }
 
-        if (to >= 0 && to < cur.size()) {
+        if (to >= 0 && to < a.size()) {
             if (!toInclusive) {
                 --to;
             }
@@ -238,10 +220,7 @@ public class ArraySet<T> implements NavigableSet<T>, Iterable<T> {
             --to;
         }
 
-        if (to - from + 1 > 0) {
-            return new ArraySet<>(a, comparator, from, to + 1);
-        }
-        return new ArraySet<>(comparator);
+        return new ArraySet<>(a.subList(from, Math.max(to + 1, from)), comparator, naturalOrder);
     }
 
     @Override
@@ -256,7 +235,7 @@ public class ArraySet<T> implements NavigableSet<T>, Iterable<T> {
 
     @Override
     public Comparator<? super T> comparator() {
-        return comparator;
+        return naturalOrder ? null : comparator;
     }
 
     @Override
@@ -279,7 +258,7 @@ public class ArraySet<T> implements NavigableSet<T>, Iterable<T> {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
-        return a.get(left);
+        return a.get(0);
     }
 
     @Override
@@ -287,7 +266,7 @@ public class ArraySet<T> implements NavigableSet<T>, Iterable<T> {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
-        return a.get(right - 1);
+        return a.get(a.size() - 1);
     }
 
     @Override

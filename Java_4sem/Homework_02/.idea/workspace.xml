@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3af4353f-68ef-42c0-806e-cc399775e0b9" name="Default" comment="" />
+    <list default="true" id="3af4353f-68ef-42c0-806e-cc399775e0b9" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Homework_02/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet$1.class" afterPath="$PROJECT_DIR$/out/production/Homework_02/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Homework_02/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet$2.class" afterPath="$PROJECT_DIR$/out/production/Homework_02/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Homework_02/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet.class" afterPath="$PROJECT_DIR$/out/production/Homework_02/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Homework_02/ru/ifmo/ctddev/gizatullin/arrayset/Main.class" afterPath="$PROJECT_DIR$/out/production/Homework_02/ru/ifmo/ctddev/gizatullin/arrayset/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet.java" afterPath="$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/arrayset/Main.java" afterPath="$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/arrayset/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="Homework_02.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -28,11 +36,11 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/arrayset/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="149" max-vertical-offset="799">
-              <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="313" max-vertical-offset="765">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding>
-                <element signature="e#366#522#0" expanded="true" />
-                <element signature="e#521#522#0" expanded="true" />
+                <element signature="e#303#459#0" expanded="true" />
+                <element signature="e#458#459#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -41,36 +49,54 @@
       <file leaf-file-name="ArraySet.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24170616" vertical-offset="0" max-vertical-offset="2635">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.83886254" vertical-offset="302" max-vertical-offset="5253">
+              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
               <folding>
-                <element signature="method#ArraySet#0;class#ArraySet#0" expanded="false" />
-                <element signature="method#ArraySet#1;class#ArraySet#0" expanded="false" />
-                <element signature="method#ArraySet#2;class#ArraySet#0" expanded="false" />
-                <element signature="method#ArraySet#3;class#ArraySet#0" expanded="false" />
-                <element signature="method#lower#0;class#ArraySet#0" expanded="false" />
-                <element signature="method#floor#0;class#ArraySet#0" expanded="false" />
-                <element signature="method#ceiling#0;class#ArraySet#0" expanded="false" />
-                <element signature="method#higher#0;class#ArraySet#0" expanded="false" />
-                <element signature="method#contains#0;class#ArraySet#0" expanded="false" />
-                <element signature="method#iterator#0;class#ArraySet#0" expanded="false" />
-                <element signature="e#3660#3661#0" expanded="true" />
-                <element signature="e#3719#3720#0" expanded="true" />
-                <element signature="e#3772#3773#0" expanded="true" />
-                <element signature="e#3832#3833#0" expanded="true" />
-                <element signature="method#toArray#1;class#ArraySet#0" expanded="false" />
-                <element signature="method#containsAll#0;class#ArraySet#0" expanded="false" />
-                <element signature="method#descendingSet#0;class#ArraySet#0" expanded="false" />
-                <element signature="method#descendingIterator#0;class#ArraySet#0" expanded="false" />
-                <element signature="e#5034#5035#0" expanded="true" />
-                <element signature="e#5092#5093#0" expanded="true" />
-                <element signature="e#5145#5146#0" expanded="true" />
-                <element signature="e#5205#5206#0" expanded="true" />
-                <element signature="method#headSet#0;class#ArraySet#0" expanded="false" />
-                <element signature="method#tailSet#0;class#ArraySet#0" expanded="false" />
-                <element signature="method#first#0;class#ArraySet#0" expanded="false" />
-                <element signature="method#last#0;class#ArraySet#0" expanded="false" />
+                <element signature="e#1022#1193#0" expanded="true" />
+                <element signature="e#1192#1193#0" expanded="true" />
+                <element signature="e#2830#2831#0" expanded="true" />
+                <element signature="e#2861#2862#0" expanded="true" />
+                <element signature="e#2907#2908#0" expanded="true" />
+                <element signature="e#2941#2942#0" expanded="true" />
+                <element signature="e#2996#2997#0" expanded="true" />
+                <element signature="e#3070#3071#0" expanded="true" />
+                <element signature="e#3487#3488#0" expanded="true" />
+                <element signature="e#3521#3522#0" expanded="true" />
+                <element signature="e#6088#6089#0" expanded="true" />
+                <element signature="e#6143#6144#0" expanded="true" />
+                <element signature="e#6219#6220#0" expanded="true" />
+                <element signature="e#6285#6286#0" expanded="true" />
+                <element signature="e#6347#6348#0" expanded="true" />
+                <element signature="e#6395#6396#0" expanded="true" />
+                <element signature="e#6459#6460#0" expanded="true" />
+                <element signature="e#6508#6509#0" expanded="true" />
+                <element signature="e#6864#6865#0" expanded="true" />
+                <element signature="e#6921#6922#0" expanded="true" />
+                <element signature="e#6962#6963#0" expanded="true" />
+                <element signature="e#7019#7020#0" expanded="true" />
+                <element signature="e#7089#7090#0" expanded="true" />
+                <element signature="e#7146#7147#0" expanded="true" />
+                <element signature="e#7209#7210#0" expanded="true" />
+                <element signature="e#7266#7267#0" expanded="true" />
+                <element signature="e#7329#7330#0" expanded="true" />
+                <element signature="e#7386#7387#0" expanded="true" />
+                <element signature="e#7427#7428#0" expanded="true" />
+                <element signature="e#7484#7485#0" expanded="true" />
+                <element signature="e#7529#7530#0" expanded="true" />
+                <element signature="e#7586#7587#0" expanded="true" />
+                <element signature="e#7639#7640#0" expanded="true" />
+                <element signature="e#7696#7697#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="List.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/List.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="9322" max-vertical-offset="12155">
+              <caret line="599" column="6" selection-start-line="599" selection-start-column="6" selection-end-line="599" selection-end-column="6" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -78,7 +104,7 @@
     </leaf>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/tests" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -87,8 +113,8 @@
         <option value="$PROJECT_DIR$/src/ArraySet.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/tests/java/info/kgeorgiy/java/advanced/arrayset/NavigableSetTest.java" />
-        <option value="$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet.java" />
         <option value="$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/arrayset/Main.java" />
+        <option value="$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet.java" />
       </list>
     </option>
   </component>
@@ -120,6 +146,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -173,7 +200,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -192,7 +218,120 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests/lib/quickcheck-0.6.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RestoreUpdateTree">
+    <UpdateInfo date="Moments ago" ActionInfo="_Update">
+      <UpdatedFiles>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated from server" />
+          <option name="myStatusName" value="Changed on server" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CHANGED_ON_SERVER" />
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Updated" />
+            <option name="myStatusName" value="Changed" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="UPDATED" />
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/tests/artifacts/ArraySetTest.jar</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/tests/artifacts/WalkTest.jar</PATH>
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Created" />
+            <option name="myStatusName" value="Created" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="CREATED" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Deleted" />
+            <option name="myStatusName" value="Deleted" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="true" />
+            <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Restored" />
+            <option name="myStatusName" value="Will be restored" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="RESTORED" />
+          </FILE-GROUP>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Modified" />
+          <option name="myStatusName" value="Modified" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MODIFIED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Skipped" />
+          <option name="myStatusName" value="Skipped" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="SKIPPED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with conflicts" />
+          <option name="myStatusName" value="Will be merged with conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_CONFLICTS" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with tree conflicts" />
+          <option name="myStatusName" value="Merged with tree conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with property conflicts" />
+          <option name="myStatusName" value="Will be merged with property conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged" />
+          <option name="myStatusName" value="Will be merged" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Not in repository" />
+          <option name="myStatusName" value="Not in repository" />
+          <option name="mySupportsDeletion" value="true" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UNKNOWN" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Locally added" />
+          <option name="myStatusName" value="Locally added" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="LOCALLY_ADDED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Locally removed" />
+          <option name="myStatusName" value="Locally removed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="LOCALLY_REMOVED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Switched" />
+          <option name="myStatusName" value="Switched" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="SWITCHED" />
+        </FILE-GROUP>
+      </UpdatedFiles>
+    </UpdateInfo>
   </component>
   <component name="RunManager" selected="Application.Tester">
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -398,6 +537,13 @@
       <option name="number" value="Default" />
       <updated>1424728888972</updated>
     </task>
+    <task id="LOCAL-00001" summary="Main.java changed&#10;">
+      <created>1424921166780</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1424921166780</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -413,7 +559,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937685" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5816024" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -448,22 +594,26 @@
     <ignored-roots>
       <path value="$USER_HOME$" />
     </ignored-roots>
+    <MESSAGE value="Main.java changed&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Main.java changed&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/arrayset/Main.java</url>
-          <line>36</line>
+          <line>24</line>
           <properties />
-          <option name="timeStamp" value="11" />
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="13" />
+      <option name="time" value="15" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="a.get(res)" language="JAVA" custom="" />
+        <watch expression="i" language="JAVA" custom="" />
+        <watch expression="last" language="JAVA" custom="" />
+        <watch expression="a" language="JAVA" custom="" />
       </configuration>
     </watches-manager>
   </component>
@@ -477,8 +627,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="1037">
           <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
           <folding>
-            <element signature="e#366#522#0" expanded="true" />
-            <element signature="e#521#522#0" expanded="true" />
+            <element signature="e#303#459#0" expanded="true" />
+            <element signature="e#458#459#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -488,32 +638,40 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3757">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="method#ArraySet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#1;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#2;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#3;class#ArraySet#0" expanded="false" />
-            <element signature="method#lower#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#floor#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#ceiling#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#higher#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#contains#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#iterator#0;class#ArraySet#0" expanded="false" />
-            <element signature="e#3660#3661#0" expanded="true" />
-            <element signature="e#3719#3720#0" expanded="true" />
-            <element signature="e#3772#3773#0" expanded="true" />
-            <element signature="e#3832#3833#0" expanded="true" />
-            <element signature="method#toArray#1;class#ArraySet#0" expanded="false" />
-            <element signature="method#containsAll#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#descendingSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#descendingIterator#0;class#ArraySet#0" expanded="false" />
-            <element signature="e#5034#5035#0" expanded="true" />
-            <element signature="e#5092#5093#0" expanded="true" />
-            <element signature="e#5145#5146#0" expanded="true" />
-            <element signature="e#5205#5206#0" expanded="true" />
-            <element signature="method#headSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#tailSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#first#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#last#0;class#ArraySet#0" expanded="false" />
+            <element signature="e#1022#1193#0" expanded="true" />
+            <element signature="e#1192#1193#0" expanded="true" />
+            <element signature="e#2830#2831#0" expanded="true" />
+            <element signature="e#2861#2862#0" expanded="true" />
+            <element signature="e#2907#2908#0" expanded="true" />
+            <element signature="e#2941#2942#0" expanded="true" />
+            <element signature="e#2996#2997#0" expanded="true" />
+            <element signature="e#3070#3071#0" expanded="true" />
+            <element signature="e#3487#3488#0" expanded="true" />
+            <element signature="e#3521#3522#0" expanded="true" />
+            <element signature="e#6088#6089#0" expanded="true" />
+            <element signature="e#6143#6144#0" expanded="true" />
+            <element signature="e#6219#6220#0" expanded="true" />
+            <element signature="e#6285#6286#0" expanded="true" />
+            <element signature="e#6347#6348#0" expanded="true" />
+            <element signature="e#6395#6396#0" expanded="true" />
+            <element signature="e#6459#6460#0" expanded="true" />
+            <element signature="e#6508#6509#0" expanded="true" />
+            <element signature="e#6864#6865#0" expanded="true" />
+            <element signature="e#6921#6922#0" expanded="true" />
+            <element signature="e#6962#6963#0" expanded="true" />
+            <element signature="e#7019#7020#0" expanded="true" />
+            <element signature="e#7089#7090#0" expanded="true" />
+            <element signature="e#7146#7147#0" expanded="true" />
+            <element signature="e#7209#7210#0" expanded="true" />
+            <element signature="e#7266#7267#0" expanded="true" />
+            <element signature="e#7329#7330#0" expanded="true" />
+            <element signature="e#7386#7387#0" expanded="true" />
+            <element signature="e#7427#7428#0" expanded="true" />
+            <element signature="e#7484#7485#0" expanded="true" />
+            <element signature="e#7529#7530#0" expanded="true" />
+            <element signature="e#7586#7587#0" expanded="true" />
+            <element signature="e#7639#7640#0" expanded="true" />
+            <element signature="e#7696#7697#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -523,8 +681,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="986">
           <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
           <folding>
-            <element signature="e#366#522#0" expanded="true" />
-            <element signature="e#521#522#0" expanded="true" />
+            <element signature="e#303#459#0" expanded="true" />
+            <element signature="e#458#459#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -541,32 +699,40 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2788">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="method#ArraySet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#1;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#2;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#3;class#ArraySet#0" expanded="false" />
-            <element signature="method#lower#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#floor#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#ceiling#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#higher#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#contains#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#iterator#0;class#ArraySet#0" expanded="false" />
-            <element signature="e#3660#3661#0" expanded="true" />
-            <element signature="e#3719#3720#0" expanded="true" />
-            <element signature="e#3772#3773#0" expanded="true" />
-            <element signature="e#3832#3833#0" expanded="true" />
-            <element signature="method#toArray#1;class#ArraySet#0" expanded="false" />
-            <element signature="method#containsAll#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#descendingSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#descendingIterator#0;class#ArraySet#0" expanded="false" />
-            <element signature="e#5034#5035#0" expanded="true" />
-            <element signature="e#5092#5093#0" expanded="true" />
-            <element signature="e#5145#5146#0" expanded="true" />
-            <element signature="e#5205#5206#0" expanded="true" />
-            <element signature="method#headSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#tailSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#first#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#last#0;class#ArraySet#0" expanded="false" />
+            <element signature="e#1022#1193#0" expanded="true" />
+            <element signature="e#1192#1193#0" expanded="true" />
+            <element signature="e#2830#2831#0" expanded="true" />
+            <element signature="e#2861#2862#0" expanded="true" />
+            <element signature="e#2907#2908#0" expanded="true" />
+            <element signature="e#2941#2942#0" expanded="true" />
+            <element signature="e#2996#2997#0" expanded="true" />
+            <element signature="e#3070#3071#0" expanded="true" />
+            <element signature="e#3487#3488#0" expanded="true" />
+            <element signature="e#3521#3522#0" expanded="true" />
+            <element signature="e#6088#6089#0" expanded="true" />
+            <element signature="e#6143#6144#0" expanded="true" />
+            <element signature="e#6219#6220#0" expanded="true" />
+            <element signature="e#6285#6286#0" expanded="true" />
+            <element signature="e#6347#6348#0" expanded="true" />
+            <element signature="e#6395#6396#0" expanded="true" />
+            <element signature="e#6459#6460#0" expanded="true" />
+            <element signature="e#6508#6509#0" expanded="true" />
+            <element signature="e#6864#6865#0" expanded="true" />
+            <element signature="e#6921#6922#0" expanded="true" />
+            <element signature="e#6962#6963#0" expanded="true" />
+            <element signature="e#7019#7020#0" expanded="true" />
+            <element signature="e#7089#7090#0" expanded="true" />
+            <element signature="e#7146#7147#0" expanded="true" />
+            <element signature="e#7209#7210#0" expanded="true" />
+            <element signature="e#7266#7267#0" expanded="true" />
+            <element signature="e#7329#7330#0" expanded="true" />
+            <element signature="e#7386#7387#0" expanded="true" />
+            <element signature="e#7427#7428#0" expanded="true" />
+            <element signature="e#7484#7485#0" expanded="true" />
+            <element signature="e#7529#7530#0" expanded="true" />
+            <element signature="e#7586#7587#0" expanded="true" />
+            <element signature="e#7639#7640#0" expanded="true" />
+            <element signature="e#7696#7697#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -576,8 +742,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="425" max-vertical-offset="986">
           <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
           <folding>
-            <element signature="e#366#522#0" expanded="true" />
-            <element signature="e#521#522#0" expanded="true" />
+            <element signature="e#303#459#0" expanded="true" />
+            <element signature="e#458#459#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -594,32 +760,40 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2244">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="method#ArraySet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#1;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#2;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#3;class#ArraySet#0" expanded="false" />
-            <element signature="method#lower#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#floor#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#ceiling#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#higher#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#contains#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#iterator#0;class#ArraySet#0" expanded="false" />
-            <element signature="e#3660#3661#0" expanded="true" />
-            <element signature="e#3719#3720#0" expanded="true" />
-            <element signature="e#3772#3773#0" expanded="true" />
-            <element signature="e#3832#3833#0" expanded="true" />
-            <element signature="method#toArray#1;class#ArraySet#0" expanded="false" />
-            <element signature="method#containsAll#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#descendingSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#descendingIterator#0;class#ArraySet#0" expanded="false" />
-            <element signature="e#5034#5035#0" expanded="true" />
-            <element signature="e#5092#5093#0" expanded="true" />
-            <element signature="e#5145#5146#0" expanded="true" />
-            <element signature="e#5205#5206#0" expanded="true" />
-            <element signature="method#headSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#tailSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#first#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#last#0;class#ArraySet#0" expanded="false" />
+            <element signature="e#1022#1193#0" expanded="true" />
+            <element signature="e#1192#1193#0" expanded="true" />
+            <element signature="e#2830#2831#0" expanded="true" />
+            <element signature="e#2861#2862#0" expanded="true" />
+            <element signature="e#2907#2908#0" expanded="true" />
+            <element signature="e#2941#2942#0" expanded="true" />
+            <element signature="e#2996#2997#0" expanded="true" />
+            <element signature="e#3070#3071#0" expanded="true" />
+            <element signature="e#3487#3488#0" expanded="true" />
+            <element signature="e#3521#3522#0" expanded="true" />
+            <element signature="e#6088#6089#0" expanded="true" />
+            <element signature="e#6143#6144#0" expanded="true" />
+            <element signature="e#6219#6220#0" expanded="true" />
+            <element signature="e#6285#6286#0" expanded="true" />
+            <element signature="e#6347#6348#0" expanded="true" />
+            <element signature="e#6395#6396#0" expanded="true" />
+            <element signature="e#6459#6460#0" expanded="true" />
+            <element signature="e#6508#6509#0" expanded="true" />
+            <element signature="e#6864#6865#0" expanded="true" />
+            <element signature="e#6921#6922#0" expanded="true" />
+            <element signature="e#6962#6963#0" expanded="true" />
+            <element signature="e#7019#7020#0" expanded="true" />
+            <element signature="e#7089#7090#0" expanded="true" />
+            <element signature="e#7146#7147#0" expanded="true" />
+            <element signature="e#7209#7210#0" expanded="true" />
+            <element signature="e#7266#7267#0" expanded="true" />
+            <element signature="e#7329#7330#0" expanded="true" />
+            <element signature="e#7386#7387#0" expanded="true" />
+            <element signature="e#7427#7428#0" expanded="true" />
+            <element signature="e#7484#7485#0" expanded="true" />
+            <element signature="e#7529#7530#0" expanded="true" />
+            <element signature="e#7586#7587#0" expanded="true" />
+            <element signature="e#7639#7640#0" expanded="true" />
+            <element signature="e#7696#7697#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -629,32 +803,40 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3111">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="method#ArraySet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#1;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#2;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#3;class#ArraySet#0" expanded="false" />
-            <element signature="method#lower#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#floor#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#ceiling#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#higher#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#contains#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#iterator#0;class#ArraySet#0" expanded="false" />
-            <element signature="e#3660#3661#0" expanded="true" />
-            <element signature="e#3719#3720#0" expanded="true" />
-            <element signature="e#3772#3773#0" expanded="true" />
-            <element signature="e#3832#3833#0" expanded="true" />
-            <element signature="method#toArray#1;class#ArraySet#0" expanded="false" />
-            <element signature="method#containsAll#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#descendingSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#descendingIterator#0;class#ArraySet#0" expanded="false" />
-            <element signature="e#5034#5035#0" expanded="true" />
-            <element signature="e#5092#5093#0" expanded="true" />
-            <element signature="e#5145#5146#0" expanded="true" />
-            <element signature="e#5205#5206#0" expanded="true" />
-            <element signature="method#headSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#tailSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#first#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#last#0;class#ArraySet#0" expanded="false" />
+            <element signature="e#1022#1193#0" expanded="true" />
+            <element signature="e#1192#1193#0" expanded="true" />
+            <element signature="e#2830#2831#0" expanded="true" />
+            <element signature="e#2861#2862#0" expanded="true" />
+            <element signature="e#2907#2908#0" expanded="true" />
+            <element signature="e#2941#2942#0" expanded="true" />
+            <element signature="e#2996#2997#0" expanded="true" />
+            <element signature="e#3070#3071#0" expanded="true" />
+            <element signature="e#3487#3488#0" expanded="true" />
+            <element signature="e#3521#3522#0" expanded="true" />
+            <element signature="e#6088#6089#0" expanded="true" />
+            <element signature="e#6143#6144#0" expanded="true" />
+            <element signature="e#6219#6220#0" expanded="true" />
+            <element signature="e#6285#6286#0" expanded="true" />
+            <element signature="e#6347#6348#0" expanded="true" />
+            <element signature="e#6395#6396#0" expanded="true" />
+            <element signature="e#6459#6460#0" expanded="true" />
+            <element signature="e#6508#6509#0" expanded="true" />
+            <element signature="e#6864#6865#0" expanded="true" />
+            <element signature="e#6921#6922#0" expanded="true" />
+            <element signature="e#6962#6963#0" expanded="true" />
+            <element signature="e#7019#7020#0" expanded="true" />
+            <element signature="e#7089#7090#0" expanded="true" />
+            <element signature="e#7146#7147#0" expanded="true" />
+            <element signature="e#7209#7210#0" expanded="true" />
+            <element signature="e#7266#7267#0" expanded="true" />
+            <element signature="e#7329#7330#0" expanded="true" />
+            <element signature="e#7386#7387#0" expanded="true" />
+            <element signature="e#7427#7428#0" expanded="true" />
+            <element signature="e#7484#7485#0" expanded="true" />
+            <element signature="e#7529#7530#0" expanded="true" />
+            <element signature="e#7586#7587#0" expanded="true" />
+            <element signature="e#7639#7640#0" expanded="true" />
+            <element signature="e#7696#7697#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -677,7 +859,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2441" max-vertical-offset="86853">
           <caret line="210" column="8" selection-start-line="210" selection-start-column="8" selection-end-line="210" selection-end-column="8" />
-          <folding />
+          <folding>
+            <element signature="method#binarySearch#1;class#Collections#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -686,8 +870,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="476">
           <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
           <folding>
-            <element signature="e#366#522#0" expanded="true" />
-            <element signature="e#521#522#0" expanded="true" />
+            <element signature="e#303#459#0" expanded="true" />
+            <element signature="e#458#459#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -697,32 +881,40 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2737">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="method#ArraySet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#1;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#2;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#3;class#ArraySet#0" expanded="false" />
-            <element signature="method#lower#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#floor#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#ceiling#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#higher#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#contains#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#iterator#0;class#ArraySet#0" expanded="false" />
-            <element signature="e#3660#3661#0" expanded="true" />
-            <element signature="e#3719#3720#0" expanded="true" />
-            <element signature="e#3772#3773#0" expanded="true" />
-            <element signature="e#3832#3833#0" expanded="true" />
-            <element signature="method#toArray#1;class#ArraySet#0" expanded="false" />
-            <element signature="method#containsAll#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#descendingSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#descendingIterator#0;class#ArraySet#0" expanded="false" />
-            <element signature="e#5034#5035#0" expanded="true" />
-            <element signature="e#5092#5093#0" expanded="true" />
-            <element signature="e#5145#5146#0" expanded="true" />
-            <element signature="e#5205#5206#0" expanded="true" />
-            <element signature="method#headSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#tailSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#first#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#last#0;class#ArraySet#0" expanded="false" />
+            <element signature="e#1022#1193#0" expanded="true" />
+            <element signature="e#1192#1193#0" expanded="true" />
+            <element signature="e#2830#2831#0" expanded="true" />
+            <element signature="e#2861#2862#0" expanded="true" />
+            <element signature="e#2907#2908#0" expanded="true" />
+            <element signature="e#2941#2942#0" expanded="true" />
+            <element signature="e#2996#2997#0" expanded="true" />
+            <element signature="e#3070#3071#0" expanded="true" />
+            <element signature="e#3487#3488#0" expanded="true" />
+            <element signature="e#3521#3522#0" expanded="true" />
+            <element signature="e#6088#6089#0" expanded="true" />
+            <element signature="e#6143#6144#0" expanded="true" />
+            <element signature="e#6219#6220#0" expanded="true" />
+            <element signature="e#6285#6286#0" expanded="true" />
+            <element signature="e#6347#6348#0" expanded="true" />
+            <element signature="e#6395#6396#0" expanded="true" />
+            <element signature="e#6459#6460#0" expanded="true" />
+            <element signature="e#6508#6509#0" expanded="true" />
+            <element signature="e#6864#6865#0" expanded="true" />
+            <element signature="e#6921#6922#0" expanded="true" />
+            <element signature="e#6962#6963#0" expanded="true" />
+            <element signature="e#7019#7020#0" expanded="true" />
+            <element signature="e#7089#7090#0" expanded="true" />
+            <element signature="e#7146#7147#0" expanded="true" />
+            <element signature="e#7209#7210#0" expanded="true" />
+            <element signature="e#7266#7267#0" expanded="true" />
+            <element signature="e#7329#7330#0" expanded="true" />
+            <element signature="e#7386#7387#0" expanded="true" />
+            <element signature="e#7427#7428#0" expanded="true" />
+            <element signature="e#7484#7485#0" expanded="true" />
+            <element signature="e#7529#7530#0" expanded="true" />
+            <element signature="e#7586#7587#0" expanded="true" />
+            <element signature="e#7639#7640#0" expanded="true" />
+            <element signature="e#7696#7697#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -732,8 +924,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="255">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding>
-            <element signature="e#366#522#0" expanded="true" />
-            <element signature="e#521#522#0" expanded="true" />
+            <element signature="e#303#459#0" expanded="true" />
+            <element signature="e#458#459#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -848,7 +1040,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15170279" vertical-offset="1007" max-vertical-offset="7616">
           <caret line="90" column="6" selection-start-line="90" selection-start-column="6" selection-end-line="90" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -856,7 +1047,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13157895" vertical-offset="0" max-vertical-offset="646">
           <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -864,7 +1054,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5165877" vertical-offset="29440" max-vertical-offset="60095">
           <caret line="1834" column="27" selection-start-line="1834" selection-start-column="27" selection-end-line="1834" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -872,29 +1061,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="7531">
           <caret line="41" column="43" selection-start-line="41" selection-start-column="43" selection-end-line="41" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1097#1274#0" expanded="false" />
-            <element signature="e#1273#1274#0" expanded="false" />
-            <element signature="e#8308#8309#0" expanded="false" />
-            <element signature="e#8351#8352#0" expanded="false" />
-            <element signature="e#8417#8418#0" expanded="false" />
-            <element signature="e#8481#8482#0" expanded="false" />
-            <element signature="e#8551#8552#0" expanded="false" />
-            <element signature="e#8597#8598#0" expanded="false" />
-            <element signature="e#9912#9913#0" expanded="false" />
-            <element signature="e#9952#9953#0" expanded="false" />
-            <element signature="e#10006#10007#0" expanded="false" />
-            <element signature="e#10041#10042#0" expanded="false" />
-            <element signature="e#10284#10285#0" expanded="false" />
-            <element signature="e#10354#10355#0" expanded="false" />
-            <element signature="e#10519#10520#0" expanded="false" />
-            <element signature="e#10589#10590#0" expanded="false" />
-            <element signature="e#10748#10749#0" expanded="false" />
-            <element signature="e#10830#10831#0" expanded="false" />
-            <element signature="e#11373#11374#0" expanded="false" />
-            <element signature="e#11421#11422#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -902,7 +1068,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.2857143" vertical-offset="1914" max-vertical-offset="4165">
           <caret line="107" column="17" selection-start-line="107" selection-start-column="17" selection-end-line="107" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -910,7 +1075,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.08" vertical-offset="0" max-vertical-offset="5933">
           <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -918,19 +1082,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3580247" vertical-offset="4576" max-vertical-offset="8245">
           <caret line="319" column="31" selection-start-line="319" selection-start-column="31" selection-end-line="319" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/Collections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6775" vertical-offset="2058" max-vertical-offset="86751">
-          <caret line="174" column="15" selection-start-line="174" selection-start-column="15" selection-end-line="174" selection-end-column="15" />
-          <folding>
-            <element signature="e#7284#7285#0" expanded="true" />
-            <element signature="e#7312#7313#0" expanded="true" />
-            <element signature="method#binarySearch#1;class#Collections#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -938,7 +1089,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.8679707" vertical-offset="1274" max-vertical-offset="1683">
           <caret line="53" column="17" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -946,7 +1096,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5819071" vertical-offset="2533" max-vertical-offset="9843">
           <caret line="188" column="9" selection-start-line="188" selection-start-column="9" selection-end-line="188" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -954,23 +1103,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.628788" vertical-offset="608" max-vertical-offset="2941">
           <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33225283" vertical-offset="16183" max-vertical-offset="23715">
-          <caret line="1015" column="8" selection-start-line="1015" selection-start-column="8" selection-end-line="1015" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.80650157" vertical-offset="11107" max-vertical-offset="12155">
-          <caret line="707" column="12" selection-start-line="707" selection-start-column="12" selection-end-line="707" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -978,7 +1110,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2086" max-vertical-offset="4964">
           <caret line="180" column="12" selection-start-line="180" selection-start-column="12" selection-end-line="180" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -986,7 +1117,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="855" max-vertical-offset="6749">
           <caret line="94" column="17" selection-start-line="94" selection-start-column="17" selection-end-line="94" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -994,7 +1124,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1176" max-vertical-offset="2873">
           <caret line="104" column="46" selection-start-line="104" selection-start-column="43" selection-end-line="104" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1002,10 +1131,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.02970297" vertical-offset="29242" max-vertical-offset="47311">
           <caret line="1929" column="8" selection-start-line="1929" selection-start-column="8" selection-end-line="1929" selection-end-column="8" />
-          <folding>
-            <element signature="e#5767#5768#0" expanded="true" />
-            <element signature="e#5800#5801#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1013,18 +1138,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.496139" vertical-offset="1392" max-vertical-offset="8449">
           <caret line="123" column="20" selection-start-line="123" selection-start-column="20" selection-end-line="123" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/arrayset/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="149" max-vertical-offset="799">
-          <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
-          <folding>
-            <element signature="e#366#522#0" expanded="true" />
-            <element signature="e#521#522#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1032,41 +1145,85 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/Collections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="8374" max-vertical-offset="86717">
+          <caret line="552" column="27" selection-start-line="552" selection-start-column="27" selection-end-line="552" selection-end-column="27" />
+          <folding>
+            <element signature="method#binarySearch#1;class#Collections#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3873582" vertical-offset="7360" max-vertical-offset="23715">
+          <caret line="484" column="16" selection-start-line="484" selection-start-column="16" selection-end-line="484" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="9322" max-vertical-offset="12155">
+          <caret line="599" column="6" selection-start-line="599" selection-start-column="6" selection-end-line="599" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/arrayset/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="313" max-vertical-offset="765">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="e#303#459#0" expanded="true" />
+            <element signature="e#458#459#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/ifmo/ctddev/gizatullin/arrayset/ArraySet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24170616" vertical-offset="0" max-vertical-offset="2635">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.83886254" vertical-offset="302" max-vertical-offset="5253">
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding>
-            <element signature="method#ArraySet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#1;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#2;class#ArraySet#0" expanded="false" />
-            <element signature="method#ArraySet#3;class#ArraySet#0" expanded="false" />
-            <element signature="method#lower#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#floor#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#ceiling#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#higher#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#contains#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#iterator#0;class#ArraySet#0" expanded="false" />
-            <element signature="e#3660#3661#0" expanded="true" />
-            <element signature="e#3719#3720#0" expanded="true" />
-            <element signature="e#3772#3773#0" expanded="true" />
-            <element signature="e#3832#3833#0" expanded="true" />
-            <element signature="method#toArray#1;class#ArraySet#0" expanded="false" />
-            <element signature="method#containsAll#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#descendingSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#descendingIterator#0;class#ArraySet#0" expanded="false" />
-            <element signature="e#5034#5035#0" expanded="true" />
-            <element signature="e#5092#5093#0" expanded="true" />
-            <element signature="e#5145#5146#0" expanded="true" />
-            <element signature="e#5205#5206#0" expanded="true" />
-            <element signature="method#headSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#tailSet#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#first#0;class#ArraySet#0" expanded="false" />
-            <element signature="method#last#0;class#ArraySet#0" expanded="false" />
+            <element signature="e#1022#1193#0" expanded="true" />
+            <element signature="e#1192#1193#0" expanded="true" />
+            <element signature="e#2830#2831#0" expanded="true" />
+            <element signature="e#2861#2862#0" expanded="true" />
+            <element signature="e#2907#2908#0" expanded="true" />
+            <element signature="e#2941#2942#0" expanded="true" />
+            <element signature="e#2996#2997#0" expanded="true" />
+            <element signature="e#3070#3071#0" expanded="true" />
+            <element signature="e#3487#3488#0" expanded="true" />
+            <element signature="e#3521#3522#0" expanded="true" />
+            <element signature="e#6088#6089#0" expanded="true" />
+            <element signature="e#6143#6144#0" expanded="true" />
+            <element signature="e#6219#6220#0" expanded="true" />
+            <element signature="e#6285#6286#0" expanded="true" />
+            <element signature="e#6347#6348#0" expanded="true" />
+            <element signature="e#6395#6396#0" expanded="true" />
+            <element signature="e#6459#6460#0" expanded="true" />
+            <element signature="e#6508#6509#0" expanded="true" />
+            <element signature="e#6864#6865#0" expanded="true" />
+            <element signature="e#6921#6922#0" expanded="true" />
+            <element signature="e#6962#6963#0" expanded="true" />
+            <element signature="e#7019#7020#0" expanded="true" />
+            <element signature="e#7089#7090#0" expanded="true" />
+            <element signature="e#7146#7147#0" expanded="true" />
+            <element signature="e#7209#7210#0" expanded="true" />
+            <element signature="e#7266#7267#0" expanded="true" />
+            <element signature="e#7329#7330#0" expanded="true" />
+            <element signature="e#7386#7387#0" expanded="true" />
+            <element signature="e#7427#7428#0" expanded="true" />
+            <element signature="e#7484#7485#0" expanded="true" />
+            <element signature="e#7529#7530#0" expanded="true" />
+            <element signature="e#7586#7587#0" expanded="true" />
+            <element signature="e#7639#7640#0" expanded="true" />
+            <element signature="e#7696#7697#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -9,7 +9,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
-        int[] a = {1985826776, 1246888067, -1300297742, -390516026, 398842845, 2085852955, 1410504140};
+        int[] a = {1, 1, 2, 2, 3, 5, 5};
         List<Integer> list = new ArrayList<>();
         Comparator<Integer> comp = new Comparator<Integer>() {
             @Override
@@ -22,7 +22,7 @@ public class Main {
         }
 
 //        TreeSet<Integer> treeSet;
-        ArraySet<Integer> arraySet = new ArraySet<>(list, comp);
+        ArraySet<Integer> arraySet = new ArraySet<>(list);
 
         /*{
             // -2 1 4 6 10
@@ -34,6 +34,6 @@ public class Main {
             NavigableSet<Integer> set = arraySet.subSet(l, lIn, r, rIn);
             System.out.println("  size = " + set.size());
         }*/
-        System.out.println(arraySet.lower(1985826776));
+        System.out.println(arraySet.lower(2));
     }
 }
