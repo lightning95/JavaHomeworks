@@ -139,19 +139,6 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
     }
 
     @Override
-    public Object[] toArray() {
-        return a.toArray();
-    }
-
-    @Override
-    public <T1> T1[] toArray(T1[] array) {
-        /* if (array == null){
-            throw new NullPointerException();
-        }*/
-        return a.toArray(array);
-    }
-
-    @Override
     public boolean containsAll(Collection<?> c) {
         for (Object t : c) {
             if (!contains(t)) {
