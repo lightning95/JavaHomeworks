@@ -1,0 +1,98 @@
+package ru.ifmo.ctddev.gizatullin.walk;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+public class RecursiveWalk {
+    private boolean eof;
+
+    private StringTokenizer st;
+    private BufferedReader br;
+    private PrintWriter out;
+
+    public static void main(String[] args) {
+        if (args.length < 2) {
+            System.err.println("Not enought arguments");
+        } else {
+            new RecursiveWalk().run(args[0], args[1]);
+        }
+    }
+
+    private void run(String inputFile, String outputFile) {
+        try {
+            br = new BufferedReader(new FileReader(inputFile));
+            out = new PrintWriter(outputFile);
+
+            solve();
+
+            br.close();
+            out.close();
+        } catch (IOException e) {
+//            System.err.println("InputFile reading exception");
+            e.printStackTrace();
+        }
+    }
+
+    private String nextToken() {
+        while (st == null || !st.hasMoreTokens()) {
+            try {
+                st = new StringTokenizer(br.readLine());
+            } catch (Exception e) {
+                eof = true;
+                return "";
+            }
+        }
+        return st.nextToken();
+    }
+
+    private void solve() {
+        ArrayList<String> list = new ArrayList<>();
+        for (String s = nextToken(); !eof; s = nextToken()) {
+            list.add(s);
+        }
+        directoryWalker(null, list.toArray(new String[list.size()]));
+    }
+
+    private void directoryWalker(File directory) {
+        String[] files = directory.list();
+        if (files != null) {
+            directoryWalker(directory.getPath(), files);
+        }
+    }
+
+    private void directoryWalker(String directory, String[] files) {
+        for (String name : files) {
+            File file = new File(directory, name);
+            if (file.exists()) {
+                if (file.isFile()) {
+                    anakinFileWalker(file);
+                } else if (file.isDirectory()) {
+                    directoryWalker(file);
+                }
+            } else {
+                out.printf("%08x %s\n", 0, file.getPath());
+                System.err.println("File not found: " + file.getPath());
+            }
+        }
+    }
+
+    private void anakinFileWalker(File file) {
+        try {
+            InputStream in = new FileInputStream(file);
+
+            int hash = 0x811c9dc5;
+            int c;
+
+            while ((c = in.read()) >= 0) {
+                hash = (hash * 0x01000193) ^ (c & 0xff);
+            }
+
+            out.printf("%08x %s\n", hash, file.getPath());
+        } catch (IOException e) {
+            out.printf("%08x %s\n", 0, file.getPath());
+//            System.err.println("File reading exception: " + file.getPath());
+            e.printStackTrace();
+        }
+    }
+}
