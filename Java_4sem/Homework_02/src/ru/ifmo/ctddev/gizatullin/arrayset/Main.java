@@ -35,7 +35,5 @@ public class Main {
             System.out.println("  size = " + set.size());
         }*/
         System.out.println(arraySet.lower(1985826776));
-
-//        in lower(1985826776) (comparator = All equal, elements = [1985826776, 1246888067, -1300297742, -390516026, 398842845, 2085852955, 1410504140]) expected:<null> but was:<-1300297742>
     }
 }
