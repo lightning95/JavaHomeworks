@@ -6,29 +6,28 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
     private List<T> a;
     private Comparator<? super T> comparator;
     private boolean naturalOrder;
-    private boolean reversed;
 
     public ArraySet() {
-        a = new ArrayList<>(0);
-        naturalOrder = true;
+        this(null, true);
     }
 
     public ArraySet(Collection<T> collection, Comparator<? super T> comparator) {
         this.comparator = comparator;
         if (collection.isEmpty()) {
-            a = new ArrayList<>(0);
+            a = new ReversingList<>(new ArrayList<T>(0), false);
         } else {
-            a = new ArrayList<>(collection);
-            Collections.sort(a, comparator);
+            ArrayList<T> tmp = new ArrayList<>(collection);
+            Collections.sort(tmp, comparator);
             int last = 0;
-            for (int i = 1; i < a.size(); ++i) {
-                if (comparator.compare(a.get(last), a.get(i)) != 0){
-                    a.set(++last, a.get(i));
+            for (int i = 1; i < tmp.size(); ++i) {
+                if (comparator.compare(tmp.get(last), tmp.get(i)) != 0) {
+                    tmp.set(++last, tmp.get(i));
                 }
             }
-            while (a.size() > last + 1) {
-                a.remove(a.size() - 1);
+            while (tmp.size() > last + 1) {
+                tmp.remove(tmp.size() - 1);
             }
+            a = new ReversingList<>(tmp, false);
         }
     }
 
@@ -42,11 +41,18 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
         naturalOrder = true;
     }
 
-    private ArraySet(List<T> list, Comparator<? super T> comparator, boolean naturalOrder, boolean reversed) {
+    // emptyList
+    private ArraySet(Comparator<? super T> comparator, boolean naturalOrder) {
+        this.a = new ReversingList<>(new ArrayList<T>(0), false);
         this.comparator = comparator;
-        this.a = list;
         this.naturalOrder = naturalOrder;
-        this.reversed = reversed;
+    }
+
+    // alreadySorted
+    private ArraySet(List<T> list, Comparator<? super T> comparator, boolean naturalOrder) {
+        this.a = list;
+        this.comparator = comparator;
+        this.naturalOrder = naturalOrder;
     }
 
     @Override
@@ -112,11 +118,6 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
     }
 
     @Override
-    public boolean isEmpty() {
-        return a.isEmpty();
-    }
-
-    @Override
     public boolean contains(Object o) {
         return Collections.binarySearch(a, (T) o, comparator) >= 0;
     }
@@ -139,23 +140,8 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
     }
 
     @Override
-    public boolean containsAll(Collection<?> c) {
-        for (Object t : c) {
-            if (!contains(t)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
     public NavigableSet<T> descendingSet() {
-        // TODO
-        List<T> tmp = new ArrayList<>();
-        Collections.copy(tmp, a);
-        Collections.reverse(tmp);
-
-        return new ArraySet<>(tmp, comparator);
+        return new ArraySet<>(new ReversingList<>(a, true), comparator);
     }
 
     @Override
@@ -177,15 +163,13 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
 
     @Override
     public NavigableSet<T> subSet(T fromElement, boolean fromInclusive, T toElement, boolean toInclusive) {
-        /*if (fromElement == null || toElement == null) {
-            return new ArraySet<>(comparator, naturalOrder);
-            //throw new NullPointerException();
-        }*/
+        if (fromElement == null || toElement == null) {
+            throw new NullPointerException();
+        }
 
-        /*
         if (comparator.compare(fromElement, toElement) > 0) {
             throw new IllegalArgumentException();
-        }*/
+        }
 
         int from = Collections.binarySearch(a, fromElement, comparator);
         int to = Collections.binarySearch(a, toElement, comparator);
@@ -209,17 +193,24 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
             --to;
         }
 
-        return new ArraySet<>(a.subList(from, Math.max(to + 1, from)), comparator, naturalOrder, reversed);
+        return new ArraySet<>(a.subList(from, Math.max(to + 1, from)), comparator, naturalOrder);
     }
 
     @Override
     public NavigableSet<T> headSet(T toElement, boolean inclusive) {
-        return subSet(!isEmpty() ? first() : null, true, toElement, inclusive);
+        if (isEmpty() || comparator.compare(first(), toElement) > 0) {
+            return new ArraySet<>(comparator, naturalOrder);
+        }
+
+        return subSet(first(), true, toElement, inclusive);
     }
 
     @Override
     public NavigableSet<T> tailSet(T fromElement, boolean inclusive) {
-        return subSet(fromElement, inclusive, !isEmpty() ? last() : null, true);
+        if (isEmpty() || comparator.compare(fromElement, last()) > 0) {
+            return new ArraySet<>(comparator, naturalOrder);
+        }
+        return subSet(fromElement, inclusive, last(), true);
     }
 
     @Override
@@ -247,9 +238,6 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
-        /*if (reversed){
-            return a.get(a.size() - 1);
-        }*/
         return a.get(0);
     }
 
@@ -258,9 +246,6 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
-        /*if (reversed){
-            return a.get(0);
-        }*/
         return a.get(a.size() - 1);
     }
 
@@ -275,7 +260,27 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
     }
 
     @Override
-    public void clear(){
+    public void clear() {
         throw new UnsupportedOperationException();
+    }
+
+    class ReversingList<T1> extends AbstractList<T1> implements RandomAccess {
+        private List<T1> data;
+        private boolean reversed;
+
+        ReversingList(List<T1> list, boolean reversed) {
+            data = list;
+            this.reversed = reversed;
+        }
+
+        @Override
+        public T1 get(int index) {
+            return reversed ? data.get(data.size() - index - 1) : data.get(index);
+        }
+
+        @Override
+        public int size() {
+            return data.size();
+        }
     }
 }

@@ -34,6 +34,6 @@ public class Main {
             NavigableSet<Integer> set = arraySet.subSet(l, lIn, r, rIn);
             System.out.println("  size = " + set.size());
         }*/
-        System.out.println(arraySet.lower(2));
+        System.out.println(arraySet.subSet(1, true, 3, false));
     }
 }
