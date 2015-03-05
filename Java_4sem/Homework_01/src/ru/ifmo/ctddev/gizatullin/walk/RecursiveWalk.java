@@ -7,7 +7,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 public class RecursiveWalk {
     static final int PRIME = 0x01000193;
-    static final int BUFF_SIZE = 2048;
+    static final int BUFF_SIZE = 1024;
     static final int INIT_HASH = 0x811c9dc5;
     static final String ERROR_HASH = String.format("%08x", 0x0);
 
