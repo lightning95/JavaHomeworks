@@ -34,6 +34,7 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
     public ArraySet(Collection<T> collection) {
         this(collection, new Comparator<T>() {
             @Override
+            @SuppressWarnings("unchecked")
             public int compare(T o1, T o2) {
                 return ((Comparable<T>) o1).compareTo(o2);
             }
@@ -118,6 +119,7 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean contains(Object o) {
         return Collections.binarySearch(a, (T) o, comparator) >= 0;
     }
@@ -256,11 +258,6 @@ public class ArraySet<T> extends AbstractSet<T> implements NavigableSet<T> {
 
     @Override
     public T pollLast() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void clear() {
         throw new UnsupportedOperationException();
     }
 
