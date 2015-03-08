@@ -79,7 +79,7 @@ public class Implementor implements Impler {
                 printConstructor(constructor, out, c.getSimpleName());
             }
         } // getDeclaredMethods() -> this class's, getMethods() -> all public
-        HashMap<String, Method> hashMap = new HashMap<>();
+        Map<String, Method> hashMap = new HashMap<>();
         putProtectedMethods(c, hashMap); // put protected methods to the hashMap
         for (Method method : c.getMethods()) {
             if (!inappropriateModifiers(method.getModifiers())) {
@@ -96,21 +96,21 @@ public class Implementor implements Impler {
         return Modifier.isFinal(modifiers) || Modifier.isStatic(modifiers) || Modifier.isPrivate(modifiers);
     }
 
-    private static void putProtectedMethods(Class c, Map<String, Method> hashMap) {
-        for (Method m : c.getDeclaredMethods()) {
-            if (!inappropriateModifiers(m.getModifiers())) {
-                hashMap.put(getHash(m), m);
+    private static void putProtectedMethods(Class c, Map<String, Method> map) {
+        for (Method method : c.getDeclaredMethods()) {
+            if (!inappropriateModifiers(method.getModifiers())) {
+                map.put(getHash(method), method);
             }
         }
         if (c.getSuperclass() != null) {
-            putProtectedMethods(c.getSuperclass(), hashMap);
+            putProtectedMethods(c.getSuperclass(), map);
         }
     }
 
     private static String getHash(Method method) {
         String res = method.getName();
-        for (Parameter p : method.getParameters()) {
-            res += "#" + p.getType().getName();
+        for (Parameter parameter : method.getParameters()) {
+            res += "#" + parameter.getType().getName();
         }
         return res;
     }
