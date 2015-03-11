@@ -184,7 +184,7 @@ public class Implementor implements Impler, JarImpler {
         createJar(root.getAbsolutePath(), jarFile.getAbsolutePath(), name + ".class");
     }
 
-    private void createJar(String root, String jarName, String name) {
+    private static void createJar(String root, String jarName, String name) {
         Manifest manifest = new Manifest();
         manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0");
         try (FileInputStream fileInputStream = new FileInputStream(root + File.separator + name);
