@@ -43,9 +43,10 @@ public class Implementor implements Impler {
 
     @Override
     public void implement(Class<?> c, File root) throws ImplerException {
-        if (Modifier.isFinal(c.getModifiers()) || Modifier.isStatic(c.getModifiers()) ||
+        if (inappropriateModifiers(c.getModifiers()) ||
                 !Modifier.isAbstract(c.getModifiers()) && !c.isInterface() && c.getConstructors().length == 0) {
-            throw new ImplerException("Shouldn't override static/final class " + c.getName());
+            throw new ImplerException((inappropriateModifiers(c.getModifiers()) ?
+                    "Shouldn't override static/final class " : "No public constructors ") + c.getName());
         }
         File last = root != null ? root : new File(System.getProperty("user.dir"));
         if (c.getPackage() != null) {
