@@ -23,24 +23,68 @@ import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 
 /**
- * Created by lightning95 on 3/5/15.
+ * This class implements class or interface you provide
+ * This class can implement only non-static and non-private classes and interfaces
+ * with non-private constructors
+ *
+ * @author Aydar Gizatullin a.k.a. lightning95, aydar.gizatullin@gmail.com
+ * @see info.kgeorgiy.java.advanced.implementor.Impler
+ * @see info.kgeorgiy.java.advanced.implementor.JarImpler
  */
 
 public class Implementor implements Impler, JarImpler {
+    /**
+     * LineSeparator for each OS
+     */
+    private static final String lS = System.lineSeparator();
+
+    /**
+     * Takes class name as first argument, jarFile to generate to as second.
+     * Generates a java class like {@link #implement implement}
+     *
+     * @param args arguments from the command line
+     * @see #implementJar
+     */
     public static void main(String[] args) {
-        if (args == null || args.length < 2) {
-            throw new IllegalArgumentException("Not enough arguments!");
+        if (args == null || args.length < 2 || args[0] == null) {
+            System.err.println("Not enough arguments! Must be at least 2.");
+            return;
         }
-        try {
-            Class<?> c = Class.forName(args[0]);
-            new Implementor().implementJar(c, new File(args[0]));
-        } catch (ClassNotFoundException e) {
-            System.err.println("Class not found exception: " + args[0]);
-        } catch (ImplerException e) {
-            System.err.println(e.getMessage());
+
+        if (args[0].equals("-jar") && args.length >= 3) {
+            try {
+                Class<?> c = Class.forName(args[1]);
+                new Implementor().implementJar(c, new File(args[2]));
+            } catch (ClassNotFoundException e) {
+                System.err.println("Class not found exception: " + args[1]);
+            } catch (ImplerException e) {
+                System.err.println("Class wasn't implemented, cause" + lS + e.getMessage());
+            }
+        } else if (!args.equals("-jar")) {
+            try {
+                Class<?> c = Class.forName(args[0]);
+                new Implementor().implement(c, new File(args[1]));
+            } catch (ClassNotFoundException e) {
+                System.err.println("Class not found exception: " + args[0]);
+            } catch (ImplerException e) {
+                System.err.println("Class wasn't implemented, cause" + lS + e.getMessage());
+            }
         }
     }
 
+    /**
+     * Creates a file that implements or extends interface or class.
+     * Output file is created in the folder that corresponds to the package of
+     * given class or interface. Output file contains java class, that implements
+     * or extends given class or interface and compiles without errors.
+     * Class and interface must not contain generics.
+     *
+     * @param c    class or interface will be implemented
+     * @param root directory to create class's implementation
+     * @throws ImplerException if <code>c</code> or <code>root</code> is <code>null</code>,
+     *                         <code>c</code> is <code>final</code> or has no non-private constructors
+     * @see info.kgeorgiy.java.advanced.implementor.ImplerException
+     */
     @Override
     public void implement(Class<?> c, File root) throws ImplerException {
         if (c == null) {
@@ -49,15 +93,12 @@ public class Implementor implements Impler, JarImpler {
         if (root == null) {
             throw new ImplerException("File root is null");
         }
-        if (inappropriateModifiers(c.getModifiers()) ||
+        if (Modifier.isFinal(c.getModifiers()) ||
                 !Modifier.isAbstract(c.getModifiers()) && !c.isInterface() && c.getConstructors().length == 0) {
-            throw new ImplerException((inappropriateModifiers(c.getModifiers()) ?
-                    "Shouldn't override static/final class " : "No public constructors ") + c.getName());
+            throw new ImplerException((Modifier.isFinal(c.getModifiers()) ?
+                    "Shouldn't override final class " : "No public constructors ") + c.getName());
         }
-        File last = root;
-        if (c.getPackage() != null) {
-            last = new File(root, c.getPackage().getName().replace(".", File.separator));
-        }
+        File last = c.getPackage() == null ? root : new File(root, c.getPackage().getName().replace(".", File.separator));
         if (!last.mkdirs()) {
             System.err.println("Cannot create package: " + last.getName());
         }
@@ -69,8 +110,21 @@ public class Implementor implements Impler, JarImpler {
         }
     }
 
+    /**
+     * Prints class {@code c} to {@code out}
+     *
+     * @param c   class to print
+     * @param out PrintWriter to print to
+     * @see #putProtectedMethods
+     * @see #inappropriateModifiers
+     * @see #printConstructor
+     * @see #printMethod
+     * @see #getHash
+     * @see java.io.PrintWriter
+     * @see java.lang.reflect.Modifier
+     */
     private static void printClass(Class c, PrintWriter out) {
-        out.println("package " + c.getPackage().getName() + ";\n"); // print package
+        out.println("package " + c.getPackage().getName() + ";" + lS); // print package
         out.print("public class " + c.getSimpleName() + "Impl"); // print name
         out.print(!c.isInterface() ? " extends " + c.getSimpleName() : ""); // print superclass if exists
         Class[] interfaces = c.getInterfaces(); // print implementing interfaces if exist
@@ -80,7 +134,7 @@ public class Implementor implements Impler, JarImpler {
                 out.print(interfaces[i].getName() + (i + 1 < interfaces.length ? ", " : " "));
             }
         }
-        out.println("{\n"); // begin
+        out.println("{" + lS); // begin
         for (Constructor constructor : c.getConstructors()) { // print constructors
             if (!inappropriateModifiers(constructor.getModifiers())) {
                 printConstructor(constructor, out, c.getSimpleName());
@@ -99,10 +153,29 @@ public class Implementor implements Impler, JarImpler {
         out.println("}"); // end
     }
 
+    /**
+     * Return {@code true} if the integer argument includes the
+     * {@code private} or {@code final} modifier, {@code false} otherwise.
+     *
+     * @param modifiers modifiers to check
+     * @return {@code true} if {@code modifiers} is {@code final} or {@code private},
+     * {@code false} otherwise.
+     * @see java.lang.reflect.Modifier
+     */
     private static boolean inappropriateModifiers(int modifiers) {
-        return Modifier.isFinal(modifiers) || Modifier.isStatic(modifiers) || Modifier.isPrivate(modifiers);
+        return Modifier.isFinal(modifiers) || Modifier.isPrivate(modifiers);
     }
 
+    /**
+     * Recursive method to look through superclasses of {@code c} and put methods to {@code map}
+     *
+     * @param c   class to get methods from
+     * @param map map to put methods to
+     * @see java.util.Map
+     * @see java.lang.Class#getDeclaredMethods
+     * @see #getHash
+     * @see #putProtectedMethods
+     */
     private static void putProtectedMethods(Class c, Map<String, Method> map) {
         for (Method method : c.getDeclaredMethods()) {
             if (!inappropriateModifiers(method.getModifiers())) {
@@ -114,6 +187,13 @@ public class Implementor implements Impler, JarImpler {
         }
     }
 
+    /**
+     * Gets hash-like string from method and it's parameters
+     *
+     * @param method method to get hash from
+     * @return {@code String} that represents this method ans it's parameters
+     * @see java.lang.reflect.Method#getParameters
+     */
     private static String getHash(Method method) {
         String res = method.getName();
         for (Parameter parameter : method.getParameters()) {
@@ -122,37 +202,73 @@ public class Implementor implements Impler, JarImpler {
         return res;
     }
 
+    /**
+     * Method to print {@code constructor} to the {@code out} of the class with this {@code simpleName}
+     *
+     * @param constructor {@code Constructor} to print
+     * @param out         {@code PrintWriter} to print to
+     * @param simpleName  simple name of the class
+     * @see java.io.PrintWriter
+     * @see java.lang.reflect.Constructor
+     * @see #printParameters
+     * @see #printExceptions
+     */
     private static void printConstructor(Constructor constructor, PrintWriter out, String simpleName) {
-        out.print("\t " + simpleName + "Impl (");
+        out.print("\t" + Modifier.toString(constructor.getModifiers() &
+                Modifier.constructorModifiers()) + " " + simpleName + "Impl (");
         printParameters(constructor.getParameters(), out); // print parameters
         out.print(") ");
         printExceptions(constructor.getExceptionTypes(), out); // print exceptions
-        out.print("{\n\t\tsuper(");
+        out.print("{" + lS + "\t\tsuper(");
         for (int i = 0; i < constructor.getParameterCount(); ++i) {
             out.print("arg" + (i) + (i + 1 < constructor.getParameterCount() ? ", " : ""));
         }
-        out.println(");\n\t}\n");
+        out.println(");" + lS + "\t}" + lS);
     }
 
+    /**
+     * Prints {@code method} to given {@code PrintWriter out}
+     *
+     * @param method method to print
+     * @param out    {@code PrintWriter} to print to
+     * @see #printParameters
+     * @see #printExceptions
+     * @see java.io.PrintWriter
+     */
     private static void printMethod(Method method, PrintWriter out) {
-        out.print("\tpublic " + method.getReturnType().getCanonicalName() + " " + method.getName() + "(");
+        out.print("\t" + Modifier.toString(method.getModifiers() & ~Modifier.ABSTRACT & ~Modifier.NATIVE &
+                ~Modifier.TRANSIENT) + " " + method.getReturnType().getCanonicalName() + " " + method.getName() + "(");
         printParameters(method.getParameters(), out); // print parameters
         out.print(") ");
         printExceptions(method.getExceptionTypes(), out); // print exceptions
         if (method.getReturnType().equals(void.class)) { // if void
-            out.println("{}\n");
+            out.println("{}" + lS);
         } else { // print return ~;
-            out.println("{\n\t\treturn " + (method.getReturnType().isPrimitive() ?
-                    (method.getReturnType().equals(boolean.class) ? false : 0) : null) + ";\n\t}\n");
+            out.println("{" + lS + "\t\treturn " + (method.getReturnType().isPrimitive() ?
+                    (method.getReturnType().equals(boolean.class) ? false : 0) : null) + ";" + lS + "\t}" + lS);
         }
     }
 
+    /**
+     * Prints {@code parameters} to {@code out}
+     *
+     * @param parameters array of parameters
+     * @param out        {@code PrintWriter} to print to
+     * @see java.io.PrintWriter
+     */
     private static void printParameters(Parameter[] parameters, PrintWriter out) {
         for (int i = 0; i < parameters.length; ++i) {
             out.print(parameters[i].getType().getCanonicalName() + " arg" + i + (i + 1 < parameters.length ? ", " : " "));
         }
     }
 
+    /**
+     * Prints {@code exceptions} to {@code out}
+     *
+     * @param exceptions array of exceptions of this class to print
+     * @param out        {@code PrintWriter} to print to
+     * @see java.io.PrintWriter
+     */
     private static void printExceptions(Class[] exceptions, PrintWriter out) {
         out.print((exceptions.length > 0 ? " throws " : ""));
         for (int i = 0; i < exceptions.length; ++i) {
@@ -160,6 +276,20 @@ public class Implementor implements Impler, JarImpler {
         }
     }
 
+    /**
+     * Creates temporary directory and generates implementation of the class {@code c}
+     * with the name "classname" + "Impl.class". Puts this implementation and {@code Manifest}
+     * into given {@code jarFile}.
+     *
+     * @param c       {@code Class} to implement to
+     * @param jarFile file to print to
+     * @throws ImplerException if {@code c} or {@code jarFile} is {@code null},
+     *                         or if {@code exitCode} of compilation of the implementing class is not {@code 0}
+     * @see info.kgeorgiy.java.advanced.implementor.ImplerException
+     * @see #implement
+     * @see #createJar
+     * @see #compile
+     */
     @Override
     public void implementJar(Class<?> c, File jarFile) throws ImplerException {
         if (c == null) {
@@ -179,11 +309,21 @@ public class Implementor implements Impler, JarImpler {
                 + File.separator + c.getSimpleName() + "Impl";
         int exitCode = compile(root, root.getAbsolutePath() + File.separator + name + ".java");
         if (exitCode != 0) {
-            throw new ImplerException("Compilation error, exitCode = " + exitCode + ", name = " + name );
+            throw new ImplerException("Compilation error, exitCode = " + exitCode + ", name = " + name);
         }
         createJar(root.getAbsolutePath(), jarFile.getAbsolutePath(), name + ".class");
     }
 
+    /**
+     * Creates {@code JarFile} with the name {@code jarName} and {@code Manifest}
+     * in the given directory {@code root} with {@code Class name}
+     *
+     * @param root    directory to create {@code JarFile} with the given {@code jarName}
+     * @param jarName {@code file} to write to
+     * @param name    {@code String} representing name of the {@code Class}
+     * @see java.util.jar.Manifest
+     * @see org.apache.commons.compress.utils.IOUtils
+     */
     private static void createJar(String root, String jarName, String name) {
         Manifest manifest = new Manifest();
         manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0");
@@ -197,6 +337,15 @@ public class Implementor implements Impler, JarImpler {
         }
     }
 
+    /**
+     * Returns result of the compiling
+     *
+     * @param root directory where the file locates
+     * @param file name of the file to compile
+     * @return resulting {@code int} of the compiling
+     * @see javax.tools.JavaCompiler
+     * @see javax.tools.ToolProvider
+     */
     private static int compile(final File root, final String file) {
         final JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         final List<String> args = new ArrayList<>();

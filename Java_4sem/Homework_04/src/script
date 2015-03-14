@@ -1,7 +1,2 @@
-rm -rf bin
-mkdir bin
-cp out/production/Homework_04/ru bin -r
-cp src/META-INF/ bin -r
-cp tests/artifacts/ImplementorTest.jar bin -r
-cd bin
-jar cfm Implementor.jar META-INF/MANIFEST.MF ru
+javac -cp tests/artifacts/ImplementorTest.jar:.lib/commons-compress-1.4.1.jar src/ru/ifmo/ctddev/gizatullin/implementor/Implementor.java
+java -cp "tests/artifacts/ImplementorTest.jar:./src:." ru.ifmo.ctddev.gizatullin.implementor.Implementor A "."
