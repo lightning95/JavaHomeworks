@@ -37,7 +37,6 @@ public class Implementor implements Impler {
         try (PrintWriter out = new PrintWriter(new FileWriter(new File(System.getProperty("user.dir")
                 + "/src/javax/annotation/processing", c.getSimpleName() + "Impl.java")))) {
             printClass(c, out); // firstly, create package u need
-            out.close();
         } catch (IOException e) {
             System.err.println("Class " + c.getName() + " can't be printed to " + c.getName() + "Impl");
         }
@@ -51,10 +50,10 @@ public class Implementor implements Impler {
         if (root == null) {
             throw new ImplerException("File root is null");
         }
-        if (inappropriateModifiers(c.getModifiers()) ||
+        if (Modifier.isFinal(c.getModifiers()) ||
                 !Modifier.isAbstract(c.getModifiers()) && !c.isInterface() && c.getConstructors().length == 0) {
-            throw new ImplerException((inappropriateModifiers(c.getModifiers()) ?
-                    "Shouldn't override static/final class " : "No public constructors ") + c.getName());
+            throw new ImplerException((Modifier.isFinal(c.getModifiers()) ?
+                    "Shouldn't override final class " : "No public constructors ") + c.getName());
         }
         File last = c.getPackage() == null ? root : new File(root, c.getPackage().getName().replace(".", File.separator));
         if (!last.mkdirs()) {
@@ -99,7 +98,7 @@ public class Implementor implements Impler {
     }
 
     private static boolean inappropriateModifiers(int modifiers) {
-        return Modifier.isFinal(modifiers) || Modifier.isStatic(modifiers) || Modifier.isPrivate(modifiers);
+        return Modifier.isFinal(modifiers) || Modifier.isPrivate(modifiers);
     }
 
     private static void putProtectedMethods(Class c, Map<String, Method> map) {
@@ -122,7 +121,8 @@ public class Implementor implements Impler {
     }
 
     private static void printConstructor(Constructor constructor, PrintWriter out, String simpleName) {
-        out.print("\t " + simpleName + "Impl (");
+        out.print("\t" + Modifier.toString(constructor.getModifiers() &
+                Modifier.constructorModifiers()) + " " + simpleName + "Impl (");
         printParameters(constructor.getParameters(), out); // print parameters
         out.print(") ");
         printExceptions(constructor.getExceptionTypes(), out); // print exceptions
@@ -134,7 +134,8 @@ public class Implementor implements Impler {
     }
 
     private static void printMethod(Method method, PrintWriter out) {
-        out.print("\tpublic " + method.getReturnType().getCanonicalName() + " " + method.getName() + "(");
+        out.print("\t" + Modifier.toString(method.getModifiers() & ~Modifier.ABSTRACT & ~Modifier.NATIVE &
+                ~Modifier.TRANSIENT) + " " + method.getReturnType().getCanonicalName() + " " + method.getName() + "(");
         printParameters(method.getParameters(), out); // print parameters
         out.print(") ");
         printExceptions(method.getExceptionTypes(), out); // print exceptions
