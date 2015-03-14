@@ -35,7 +35,7 @@ public class Implementor implements Impler {
 
     private static void createFile(Class c) { // just for local testing
         try (PrintWriter out = new PrintWriter(new FileWriter(new File(System.getProperty("user.dir")
-                + "/src/javax/annotation/processing", c.getSimpleName() + "Impl.java")))) {
+                + "src" + c.getPackage().getName().replace(".", File.separator), c.getSimpleName() + "Impl.java")))) {
             printClass(c, out); // firstly, create package u need
         } catch (IOException e) {
             System.err.println("Class " + c.getName() + " can't be printed to " + c.getName() + "Impl");
