@@ -19,6 +19,8 @@ import java.util.Map;
  */
 
 public class Implementor implements Impler {
+    private static String lS = System.lineSeparator();
+
     public static void main(String[] args) { // just for local testing
         if (args.length > 0) {
             try {
@@ -43,15 +45,18 @@ public class Implementor implements Impler {
 
     @Override
     public void implement(Class<?> c, File root) throws ImplerException {
+        if (c == null) {
+            throw new ImplerException("Implementing class is null");
+        }
+        if (root == null) {
+            throw new ImplerException("File root is null");
+        }
         if (inappropriateModifiers(c.getModifiers()) ||
                 !Modifier.isAbstract(c.getModifiers()) && !c.isInterface() && c.getConstructors().length == 0) {
             throw new ImplerException((inappropriateModifiers(c.getModifiers()) ?
                     "Shouldn't override static/final class " : "No public constructors ") + c.getName());
         }
-        File last = root != null ? root : new File(System.getProperty("user.dir"));
-        if (c.getPackage() != null) {
-            last = new File(last, c.getPackage().getName().replace(".", "/"));
-        }
+        File last = c.getPackage() == null ? root : new File(root, c.getPackage().getName().replace(".", File.separator));
         if (!last.mkdirs()) {
             System.err.println("Cannot create package: " + last.getName());
         }
@@ -64,7 +69,7 @@ public class Implementor implements Impler {
     }
 
     private static void printClass(Class c, PrintWriter out) {
-        out.println("package " + c.getPackage().getName() + ";\n"); // print package
+        out.println("package " + c.getPackage().getName() + ";" + lS); // print package
         out.print("public class " + c.getSimpleName() + "Impl"); // print name
         out.print(!c.isInterface() ? " extends " + c.getSimpleName() : ""); // print superclass if exists
         Class[] interfaces = c.getInterfaces(); // print implementing interfaces if exist
@@ -74,7 +79,7 @@ public class Implementor implements Impler {
                 out.print(interfaces[i].getName() + (i + 1 < interfaces.length ? ", " : " "));
             }
         }
-        out.println("{\n"); // begin
+        out.println("{" + lS); // begin
         for (Constructor constructor : c.getConstructors()) { // print constructors
             if (!inappropriateModifiers(constructor.getModifiers())) {
                 printConstructor(constructor, out, c.getSimpleName());
@@ -121,11 +126,11 @@ public class Implementor implements Impler {
         printParameters(constructor.getParameters(), out); // print parameters
         out.print(") ");
         printExceptions(constructor.getExceptionTypes(), out); // print exceptions
-        out.print("{\n\t\tsuper(");
+        out.print("{" + lS + "\t\tsuper(");
         for (int i = 0; i < constructor.getParameterCount(); ++i) {
             out.print("arg" + (i) + (i + 1 < constructor.getParameterCount() ? ", " : ""));
         }
-        out.println(");\n\t}\n");
+        out.println(");" + lS + "\t}" + lS);
     }
 
     private static void printMethod(Method method, PrintWriter out) {
@@ -134,10 +139,10 @@ public class Implementor implements Impler {
         out.print(") ");
         printExceptions(method.getExceptionTypes(), out); // print exceptions
         if (method.getReturnType().equals(void.class)) { // if void
-            out.println("{}\n");
+            out.println("{}" + lS);
         } else { // print return ~;
-            out.println("{\n\t\treturn " + (method.getReturnType().isPrimitive() ?
-                    (method.getReturnType().equals(boolean.class) ? false : 0) : null) + ";\n\t}\n");
+            out.println("{" + lS + "\t\treturn " + (method.getReturnType().isPrimitive() ?
+                    (method.getReturnType().equals(boolean.class) ? false : 0) : null) + ";" + lS + "\t}" + lS);
         }
     }
 
