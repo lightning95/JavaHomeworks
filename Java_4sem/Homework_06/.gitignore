@@ -1,6 +1,7 @@
 /.idea
 /out
 /doc
+/bin
 *.iml
 *.class
 *.gitignore
