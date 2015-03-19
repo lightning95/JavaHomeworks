@@ -18,7 +18,7 @@ public class IterativeParallelism implements ListIP {
     /**
      * Threads the {@code list} with Runners, runs and waits them to die
      *
-     * @param list of Runners to thread and run
+     * @param list list of Runners to thread and run
      * @param <T>
      * @param <R>
      * @see ru.ifmo.ctddev.gizatullin.iterativeparallelism.IterativeParallelism.Runner
@@ -69,13 +69,12 @@ public class IterativeParallelism implements ListIP {
     /**
      * Applies {@code function} to the {@code list} divided into {@code n} threads
      *
-     * @param n number of threads to divide into
-     * @param list data to divide into threads and apply function to
-     * @param function to apply
+     * @param n        number of threads to divide into
+     * @param list     data to divide into threads and apply function to
+     * @param function function to apply
      * @param <T>
      * @param <R>
-     * @return list with results of the {@code function} for each {@code Thread}
-     *
+     * @return {@code List} with results of the {@code function} for each {@code Thread}
      * @see #threader
      * @see ru.ifmo.ctddev.gizatullin.iterativeparallelism.IterativeParallelism.Runner
      * @see java.util.function.Function
@@ -91,32 +90,91 @@ public class IterativeParallelism implements ListIP {
         return result;
     }
 
+    /**
+     * Finds maximum in the {@code list} divided into {@code n} threads using {@code comparator}
+     *
+     * @param n          number of threads to divide into
+     * @param list       list to find maximum in
+     * @param comparator comparator to compare elements in the list
+     * @param <T>
+     * @return maximum in the {@code list} using {@code comparator}
+     * @throws InterruptedException
+     * @see java.lang.InterruptedException
+     * @see #apply
+     */
     @Override
-    public <T> T maximum(int i, List<? extends T> list, Comparator<? super T> comparator) throws InterruptedException {
+    public <T> T maximum(int n, List<? extends T> list, Comparator<? super T> comparator) throws InterruptedException {
         Function<List<? extends T>, T> max = data -> data.stream().max(comparator).get();
-        return max.apply(apply(i, list, max));
+        return max.apply(apply(n, list, max));
     }
 
+    /**
+     * Finds minimum in the {@code list} divided into {@code n} threads using {@code comparator}
+     *
+     * @param n          number of threads to divide into
+     * @param list       list to find minimum in
+     * @param comparator comparator to compare elements in the list
+     * @param <T>
+     * @return minimum in the {@code list} using {@code comparator}
+     * @throws InterruptedException
+     * @see java.lang.InterruptedException
+     * @see #apply
+     */
     @Override
-    public <T> T minimum(int i, List<? extends T> list, Comparator<? super T> comparator) throws InterruptedException {
+    public <T> T minimum(int n, List<? extends T> list, Comparator<? super T> comparator) throws InterruptedException {
         Function<List<? extends T>, T> min = data -> data.stream().min(comparator).get();
-        return min.apply(apply(i, list, min));
+        return min.apply(apply(n, list, min));
     }
 
+    /**
+     * Checks if every element in {@code list} matches {@code predicate}
+     *
+     * @param n         number of threads to divide into
+     * @param list      list to match predicate
+     * @param predicate predicate to match
+     * @param <T>
+     * @return {@code true} if every element matches predicate, {@code false} otherwise
+     * @throws InterruptedException
+     * @see java.lang.InterruptedException
+     * @see #apply
+     */
     @Override
-    public <T> boolean all(int i, List<? extends T> list, Predicate<? super T> predicate) throws InterruptedException {
-        return apply(i, list, data -> data.stream().allMatch(predicate)).stream().reduce(true, (a, b) -> a & b);
+    public <T> boolean all(int n, List<? extends T> list, Predicate<? super T> predicate) throws InterruptedException {
+        return apply(n, list, data -> data.stream().allMatch(predicate)).stream().reduce(true, (a, b) -> a & b);
     }
 
+    /**
+     * Checks if any element in {@code list} matches {@code predicate}
+     *
+     * @param n         number of threads to divide into
+     * @param list      list to match predicate
+     * @param predicate predicate to match
+     * @param <T>
+     * @return {@code true} if any element matches predicate, {@code false} otherwise
+     * @throws InterruptedException
+     * @see #apply
+     * @see java.lang.InterruptedException
+     */
     @Override
-    public <T> boolean any(int i, List<? extends T> list, Predicate<? super T> predicate) throws InterruptedException {
-        return apply(i, list, data -> data.stream().anyMatch(predicate)).stream().reduce(false, (a, b) -> a | b);
+    public <T> boolean any(int n, List<? extends T> list, Predicate<? super T> predicate) throws InterruptedException {
+        return apply(n, list, data -> data.stream().anyMatch(predicate)).stream().reduce(false, (a, b) -> a | b);
     }
 
+    /**
+     * Concatenates elements of the {@code list}
+     *
+     * @param n    number of threads to divide into
+     * @param list list to concatenate elements
+     * @return {@code String} the concatenation of the elements of the list
+     * @throws InterruptedException
+     * @see #apply
+     * @see java.lang.StringBuilder
+     * @see java.lang.InterruptedException
+     */
     @Override
-    public String concat(int i, List<?> list) throws InterruptedException {
+    public String concat(int n, List<?> list) throws InterruptedException {
         StringBuilder ans = new StringBuilder();
-        apply(i, list, data -> {
+        apply(n, list, data -> {
             StringBuilder result = new StringBuilder();
             data.stream().map(Object::toString).forEach(result::append);
             return result.toString();
@@ -124,10 +182,22 @@ public class IterativeParallelism implements ListIP {
         return ans.toString();
     }
 
+    /**
+     * Filters the {@code list} with the given {@code predicate}
+     *
+     * @param n         number of threads to divide into
+     * @param list      list to filter
+     * @param predicate predicate to filter
+     * @param <T>
+     * @return {@List} of elements that match the {@code predicate}
+     * @throws InterruptedException
+     * @see #apply
+     * @see java.lang.InterruptedException
+     */
     @Override
-    public <T> List<T> filter(int i, List<? extends T> list, Predicate<? super T> predicate) throws InterruptedException {
+    public <T> List<T> filter(int n, List<? extends T> list, Predicate<? super T> predicate) throws InterruptedException {
         List<T> ans = new ArrayList<>();
-        apply(i, list, data -> {
+        apply(n, list, data -> {
             List<T> result = new ArrayList<>();
             data.stream().filter(predicate).forEach(result::add);
             return result;
@@ -135,10 +205,23 @@ public class IterativeParallelism implements ListIP {
         return ans;
     }
 
+    /**
+     * Applies {@code function} to {@list} and returns {@code List} with results of the the {@function}
+     *
+     * @param n        number of threads to divide into
+     * @param list     list to map
+     * @param function function to apply
+     * @param <T>
+     * @param <U>
+     * @return {@code List} with {@code function}'s results
+     * @throws InterruptedException
+     * @see #apply
+     * @see java.lang.InterruptedException
+     */
     @Override
-    public <T, U> List<U> map(int i, List<? extends T> list, Function<? super T, ? extends U> function) throws InterruptedException {
+    public <T, U> List<U> map(int n, List<? extends T> list, Function<? super T, ? extends U> function) throws InterruptedException {
         List<U> res = new ArrayList<>();
-        apply(i, list, data -> {
+        apply(n, list, data -> {
             List<U> result = new ArrayList<>();
             data.stream().map(function).forEach(result::add);
             return result;
