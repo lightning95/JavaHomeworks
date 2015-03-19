@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
- * @author Aydar Gizatullin a.k.a. lightning95, aydar.gizatullin@gmail.com
+ * @author Aydar Gizatullin a.k.a. lightning95 (aydar.gizatullin@gmail.com)
  *         Created on 3/19/15.
  */
 

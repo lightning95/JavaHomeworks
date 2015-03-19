@@ -1,0 +1,2 @@
+javac -cp tests/artifacts/IterativeParallelismTest.jar: src/ru/ifmo/ctddev/gizatullin/iterativeparallelism/IterativeParallelism.java
+java -cp tests/artifacts/IterativeParallelismTest.jar:src:tests/lib/hamcrest-core-1.3.jar:tests/lib/junit-4.11.jar:tests/lib/quickcheck-0.6.jar info.kgeorgiy.java.advanced.concurrent.Tester list ru.ifmo.ctddev.gizatullin.iterativeparallelism.IterativeParallelism
