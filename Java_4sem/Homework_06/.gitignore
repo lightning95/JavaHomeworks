@@ -1,0 +1,6 @@
+/.idea
+/out
+/doc
+*.iml
+*.class
+*.gitignore

@@ -189,7 +189,7 @@ public class IterativeParallelism implements ListIP {
      * @param list      list to filter
      * @param predicate predicate to filter
      * @param <T>
-     * @return {@List} of elements that match the {@code predicate}
+     * @return {@code List} of elements that match the {@code predicate}
      * @throws InterruptedException
      * @see #apply
      * @see java.lang.InterruptedException
@@ -206,7 +206,7 @@ public class IterativeParallelism implements ListIP {
     }
 
     /**
-     * Applies {@code function} to {@list} and returns {@code List} with results of the the {@function}
+     * Applies {@code function} to {@code list} and returns {@code List} with results of the the {@code function}
      *
      * @param n        number of threads to divide into
      * @param list     list to map
