@@ -23,30 +23,35 @@ import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 
 /**
- * This class implements class or interface you provide
+ * This class implements class or interface you provide.
  * This class can implement only non-static and non-private classes and interfaces
- * with non-private constructors
+ * with non-private constructors.
  *
- * @author Aydar Gizatullin a.k.a. lightning95, aydar.gizatullin@gmail.com
+ * @author Aydar Gizatullin a.k.a. lightning95 (aydar.gizatullin@gmail.com)
  * @see info.kgeorgiy.java.advanced.implementor.Impler
  * @see info.kgeorgiy.java.advanced.implementor.JarImpler
  */
 
 public class Implementor implements Impler, JarImpler {
     /**
-     * LineSeparator for each OS
+     * LineSeparator for each OS.
      */
     private static final String lS = System.lineSeparator();
 
     /**
-     * Takes class name as first argument, jarFile to generate to as second.
-     * Generates a java class like {@link #implement implement}
+     * Main method to execute.
+     * <p/>
+     * If the first arguments is "-jar", tries to implement "class" as the second argument
+     * in the given jar-file - the third argument.
+     * Otherwise, tries to implement "class" as the first argument, "root" - file to locate
+     * into as second.
      *
      * @param args arguments from the command line
      * @see #implementJar
+     * @see #implement
      */
     public static void main(String[] args) {
-        if (args == null || args.length < 2 || args[0] == null) {
+        if (args == null || args.length < 2) {
             System.err.println("Not enough arguments! Must be at least 2.");
             return;
         }
@@ -60,7 +65,7 @@ public class Implementor implements Impler, JarImpler {
             } catch (ImplerException e) {
                 System.err.println("Class wasn't implemented, cause" + lS + e.getMessage());
             }
-        } else if (!args.equals("-jar")) {
+        } else if (!args[0].equals("-jar")) {
             try {
                 Class<?> c = Class.forName(args[0]);
                 new Implementor().implement(c, new File(args[1]));
@@ -69,10 +74,15 @@ public class Implementor implements Impler, JarImpler {
             } catch (ImplerException e) {
                 System.err.println("Class wasn't implemented, cause" + lS + e.getMessage());
             }
+        } else {
+            System.err.println("Usage 1: \"-jar\" <ClassName> existing <JarFile>\n" +
+                    "Usage 2: <ClassName> directory <File>");
         }
     }
 
     /**
+     * Creates a file that implements or extends interface or class.
+     * <p/>
      * Creates a file that implements or extends interface or class.
      * Output file is created in the folder that corresponds to the package of
      * given class or interface. Output file contains java class, that implements
@@ -83,7 +93,6 @@ public class Implementor implements Impler, JarImpler {
      * @param root directory to create class's implementation
      * @throws ImplerException if <code>c</code> or <code>root</code> is <code>null</code>,
      *                         <code>c</code> is <code>final</code> or has no non-private constructors
-     * @see info.kgeorgiy.java.advanced.implementor.ImplerException
      */
     @Override
     public void implement(Class<?> c, File root) throws ImplerException {
@@ -106,12 +115,15 @@ public class Implementor implements Impler, JarImpler {
         try (PrintWriter out = new PrintWriter(new FileWriter(file))) {
             printClass(c, out);
         } catch (IOException e) {
-            System.err.println("Class " + c.getName() + " can't be printed to " + file);
+            throw new ImplerException("Class " + c.getName() + " can't be printed to " + file);
         }
     }
 
     /**
-     * Prints class {@code c} to {@code out}
+     * Prints given class to PrintWriter.
+     * <p/>
+     * Prints class {@code c} to {@code PrintWriter out}, with all it's constructors, methods and their exceptions,
+     * meanwhile storing them in the {@code HashMap}.
      *
      * @param c   class to print
      * @param out PrintWriter to print to
@@ -154,7 +166,9 @@ public class Implementor implements Impler, JarImpler {
     }
 
     /**
-     * Return {@code true} if the integer argument includes the
+     * Checks modifiers for possibility to implement.
+     * <p/>
+     * Returns {@code true} if the integer argument includes the
      * {@code private} or {@code final} modifier, {@code false} otherwise.
      *
      * @param modifiers modifiers to check
@@ -167,7 +181,10 @@ public class Implementor implements Impler, JarImpler {
     }
 
     /**
-     * Recursive method to look through superclasses of {@code c} and put methods to {@code map}
+     * Puts methods of the superclasses into the map.
+     * <p/>
+     * Recursive method to look through superclasses of {@code Class c} and put methods to {@code map},
+     * if the modifiers of them are appropriate.
      *
      * @param c   class to get methods from
      * @param map map to put methods to
@@ -188,7 +205,9 @@ public class Implementor implements Impler, JarImpler {
     }
 
     /**
-     * Gets hash-like string from method and it's parameters
+     * Returns hash of the method.
+     * <p/>
+     * Gets hash-like string from {@code method} and it's parameters.
      *
      * @param method method to get hash from
      * @return {@code String} that represents this method ans it's parameters
@@ -203,7 +222,10 @@ public class Implementor implements Impler, JarImpler {
     }
 
     /**
-     * Method to print {@code constructor} to the {@code out} of the class with this {@code simpleName}
+     * Prints given constructor of the class to PrintWriter.
+     * <p/>
+     * Method to print {@code constructor} of the class to the {@code PrintWriter out}
+     * with this {@code simpleName}. Includes parameters and exceptions if necessary.
      *
      * @param constructor {@code Constructor} to print
      * @param out         {@code PrintWriter} to print to
@@ -227,7 +249,10 @@ public class Implementor implements Impler, JarImpler {
     }
 
     /**
-     * Prints {@code method} to given {@code PrintWriter out}
+     * Prints method to the give PrintWriter.
+     * <p/>
+     * Prints {@code method} to given {@code PrintWriter out}, with all it's exceptions,
+     * parameters and return type if necessary.
      *
      * @param method method to print
      * @param out    {@code PrintWriter} to print to
@@ -250,9 +275,11 @@ public class Implementor implements Impler, JarImpler {
     }
 
     /**
-     * Prints {@code parameters} to {@code out}
+     * Prints parameters of the method to the given PrintWriter.
+     * <p/>
+     * Prints {@code parameters} of the method to {@code PrintWriter out}.
      *
-     * @param parameters array of parameters
+     * @param parameters array of parameters to print
      * @param out        {@code PrintWriter} to print to
      * @see java.io.PrintWriter
      */
@@ -263,9 +290,11 @@ public class Implementor implements Impler, JarImpler {
     }
 
     /**
-     * Prints {@code exceptions} to {@code out}
+     * Prints exceptions to the given PrintWriter.
+     * <p/>
+     * Prints {@code exceptions} of the given method to {@code PrintWriter out}.
      *
-     * @param exceptions array of exceptions of this class to print
+     * @param exceptions array of exceptions of this method to print
      * @param out        {@code PrintWriter} to print to
      * @see java.io.PrintWriter
      */
@@ -277,6 +306,8 @@ public class Implementor implements Impler, JarImpler {
     }
 
     /**
+     * Implements given class and puts in the jar-file.
+     * <p/>
      * Creates temporary directory and generates implementation of the class {@code c}
      * with the name "classname" + "Impl.class". Puts this implementation and {@code Manifest}
      * into given {@code jarFile}.
@@ -285,7 +316,6 @@ public class Implementor implements Impler, JarImpler {
      * @param jarFile file to print to
      * @throws ImplerException if {@code c} or {@code jarFile} is {@code null},
      *                         or if {@code exitCode} of compilation of the implementing class is not {@code 0}
-     * @see info.kgeorgiy.java.advanced.implementor.ImplerException
      * @see #implement
      * @see #createJar
      * @see #compile
@@ -315,32 +345,35 @@ public class Implementor implements Impler, JarImpler {
     }
 
     /**
-     * Creates {@code JarFile} with the name {@code jarName} and {@code Manifest}
-     * in the given directory {@code root} with {@code Class name}
+     * Packs the class in the given jar-file.
+     * <p/>
+     * Puts {@code Manifest} and compiled class-file {@code classFile} in the the given {@code jarFile}
+     * in the given directory {@code root}.
      *
-     * @param root    directory to create {@code JarFile} with the given {@code jarName}
-     * @param jarName {@code file} to write to
-     * @param name    {@code String} representing name of the {@code Class}
+     * @param root      directory to locate {@code jarFile}
+     * @param jarFile   {@code JarFile} to write to
+     * @param classFile {@code String} representing classFile of the {@code Class}
      * @see java.util.jar.Manifest
-     * @see org.apache.commons.compress.utils.IOUtils
      */
-    private static void createJar(String root, String jarName, String name) {
+    private static void createJar(String root, String jarFile, String classFile) {
         Manifest manifest = new Manifest();
         manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0");
-        try (FileInputStream fileInputStream = new FileInputStream(root + File.separator + name);
-             JarOutputStream jarOutputStream = new JarOutputStream(new FileOutputStream(jarName), manifest)) {
-            jarOutputStream.putNextEntry(new ZipEntry(name));
+        try (FileInputStream fileInputStream = new FileInputStream(root + File.separator + classFile);
+             JarOutputStream jarOutputStream = new JarOutputStream(new FileOutputStream(jarFile), manifest)) {
+            jarOutputStream.putNextEntry(new ZipEntry(classFile));
             IOUtils.copy(fileInputStream, jarOutputStream);
             jarOutputStream.closeEntry();
         } catch (IOException e) {
-            System.err.println("== CreateJar, name = " + name + ", message = " + e.getMessage());
+            System.err.println("== CreateJar, classFile = " + classFile + ", message = " + e.getMessage());
         }
     }
 
     /**
-     * Returns result of the compiling
+     * Returns result of the compiling.
+     * <p/>
+     * Compiles the given {@code file} in the directory {@code root} and returns the exit code of the compilation
      *
-     * @param root directory where the file locates
+     * @param root directory where the file is located
      * @param file name of the file to compile
      * @return resulting {@code int} of the compiling
      * @see javax.tools.JavaCompiler
