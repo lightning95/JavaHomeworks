@@ -1,7 +1,0 @@
-rm -rf bin
-mkdir bin
-cp out/production/Homework_06/ru bin -r
-cp src/META-INF/ bin -r
-cp tests/artifacts/IterativeParallelismTest.jar bin -r
-cd bin
-jar cfm IterativeParallelism.jar META-INF/MANIFEST.MF ru
