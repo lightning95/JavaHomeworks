@@ -49,6 +49,7 @@ public class Implementor implements Impler, JarImpler {
      * @param args arguments from the command line
      * @see #implementJar
      * @see #implement
+     * @see info.kgeorgiy.java.advanced.implementor.ImplerException
      */
     public static void main(String[] args) {
         if (args == null || args.length < 2) {
@@ -354,6 +355,7 @@ public class Implementor implements Impler, JarImpler {
      * @param jarFile   {@code JarFile} to write to
      * @param classFile {@code String} representing classFile of the {@code Class}
      * @see java.util.jar.Manifest
+     * @see org.apache.commons.compress.utils.IOUtils
      */
     private static void createJar(String root, String jarFile, String classFile) {
         Manifest manifest = new Manifest();
