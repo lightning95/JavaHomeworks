@@ -1,0 +1,2 @@
+javac -cp tests/artifacts/ImplementorTest.jar: src/ru/ifmo/ctddev/gizatullin/implementor/Implementor.java
+java -cp "tests/artifacts/ImplementorTest.jar:./src:." ru.ifmo.ctddev.gizatullin.implementor.Implementor java.util.Set

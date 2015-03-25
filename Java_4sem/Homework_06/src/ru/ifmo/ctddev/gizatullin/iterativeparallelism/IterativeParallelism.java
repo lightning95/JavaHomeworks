@@ -16,11 +16,10 @@ import java.util.function.Predicate;
 public class IterativeParallelism implements ListIP {
 
     /**
-     * Threads the {@code list} with Runners, runs and waits them to die
+     * Splits the list into threads.
+     * Splits into threads the {@code list} with Runners, runs and waits them to die
      *
      * @param list list of Runners to thread and run
-     * @param <T>
-     * @param <R>
      * @see ru.ifmo.ctddev.gizatullin.iterativeparallelism.IterativeParallelism.Runner
      * @see java.lang.Thread
      * @see java.lang.InterruptedException
@@ -41,8 +40,6 @@ public class IterativeParallelism implements ListIP {
     /**
      * Class to apply {@code function} to {@code data}
      *
-     * @param <T>
-     * @param <R>
      * @see java.lang.Runnable
      * @see java.util.function.Function
      */
@@ -67,13 +64,12 @@ public class IterativeParallelism implements ListIP {
     }
 
     /**
+     * Applies function to the list.
      * Applies {@code function} to the {@code list} divided into {@code n} threads
      *
      * @param n        number of threads to divide into
      * @param list     data to divide into threads and apply function to
      * @param function function to apply
-     * @param <T>
-     * @param <R>
      * @return {@code List} with results of the {@code function} for each {@code Thread}
      * @see #threader
      * @see ru.ifmo.ctddev.gizatullin.iterativeparallelism.IterativeParallelism.Runner
@@ -81,8 +77,8 @@ public class IterativeParallelism implements ListIP {
      */
     private <T, R> List<R> apply(int n, List<? extends T> list, Function<List<? extends T>, R> function) {
         List<Runner<T, R>> threaded = new ArrayList<>();
-        for (int i = 0, num = list.size() / n; i < n; ++i) {
-            threaded.add(new Runner<>(list.subList(i * num, num * (i + 1) + (i + 1 == n ? list.size() % n : 0)), function));
+        for (int i = 0, num = Math.max(list.size() / n, 1); i < Math.min(n, list.size()); ++i) {
+            threaded.add(new Runner<>(list.subList(i * num, num * (i + 1) + (i + 1 == n && list.size() >= n ? list.size() % n : 0)), function));
         }
         threader(threaded);
         List<R> result = new ArrayList<>();
@@ -91,12 +87,12 @@ public class IterativeParallelism implements ListIP {
     }
 
     /**
+     * Finds maximum in the list.
      * Finds maximum in the {@code list} divided into {@code n} threads using {@code comparator}
      *
      * @param n          number of threads to divide into
      * @param list       list to find maximum in
      * @param comparator comparator to compare elements in the list
-     * @param <T>
      * @return maximum in the {@code list} using {@code comparator}
      * @throws InterruptedException
      * @see java.lang.InterruptedException
@@ -109,12 +105,12 @@ public class IterativeParallelism implements ListIP {
     }
 
     /**
-     * Finds minimum in the {@code list} divided into {@code n} threads using {@code comparator}
+     * Finds minimum in the list.
+     * Finds minimum in the {@code list} divided into {@code n} threads using {@code comparator}.
      *
      * @param n          number of threads to divide into
      * @param list       list to find minimum in
      * @param comparator comparator to compare elements in the list
-     * @param <T>
      * @return minimum in the {@code list} using {@code comparator}
      * @throws InterruptedException
      * @see java.lang.InterruptedException
@@ -132,7 +128,6 @@ public class IterativeParallelism implements ListIP {
      * @param n         number of threads to divide into
      * @param list      list to match predicate
      * @param predicate predicate to match
-     * @param <T>
      * @return {@code true} if every element matches predicate, {@code false} otherwise
      * @throws InterruptedException
      * @see java.lang.InterruptedException
@@ -149,7 +144,6 @@ public class IterativeParallelism implements ListIP {
      * @param n         number of threads to divide into
      * @param list      list to match predicate
      * @param predicate predicate to match
-     * @param <T>
      * @return {@code true} if any element matches predicate, {@code false} otherwise
      * @throws InterruptedException
      * @see #apply
@@ -188,7 +182,6 @@ public class IterativeParallelism implements ListIP {
      * @param n         number of threads to divide into
      * @param list      list to filter
      * @param predicate predicate to filter
-     * @param <T>
      * @return {@code List} of elements that match the {@code predicate}
      * @throws InterruptedException
      * @see #apply
@@ -206,13 +199,12 @@ public class IterativeParallelism implements ListIP {
     }
 
     /**
+     * Applies function to the list.
      * Applies {@code function} to {@code list} and returns {@code List} with results of the the {@code function}
      *
      * @param n        number of threads to divide into
      * @param list     list to map
      * @param function function to apply
-     * @param <T>
-     * @param <U>
      * @return {@code List} with {@code function}'s results
      * @throws InterruptedException
      * @see #apply
