@@ -24,6 +24,7 @@ import java.util.zip.ZipEntry;
 
 /**
  * This class implements class or interface you provide.
+ * <p/>
  * This class can implement only non-static and non-private classes and interfaces
  * with non-private constructors.
  *

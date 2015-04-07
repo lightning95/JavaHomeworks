@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Created-By: Aydar Gizatullin a.k.a. lightning95
+Class-Path: ImplementorTest.jar
+Main-Class: ru/ifmo/ctddev/gizatullin/implementor/Implementor
