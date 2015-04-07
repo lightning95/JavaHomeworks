@@ -88,6 +88,7 @@ public class IterativeParallelism implements ListIP {
 
     /**
      * Finds maximum in the list.
+     *
      * Finds maximum in the {@code list} divided into {@code n} threads using {@code comparator}.
      *
      * @param n          number of threads to divide into

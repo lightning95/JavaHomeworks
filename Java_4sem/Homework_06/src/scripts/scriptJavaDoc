@@ -1,3 +1,10 @@
 rm -rf doc
 mkdir doc
-javadoc src/ru/ifmo/ctddev/gizatullin/iterativeparallelism/IterativeParallelism.java -d doc -cp tests/java:.lib/commons-compress-1.4.1.jar -private -linkoffline http://docs.oracle.com/javase/8/docs/api/ http://docs.oracle.com/javase/8/docs/api/
+rm -rf src/info
+mkdir src/info
+mkdir src/info/kgeorgiy
+mkdir src/info/kgeorgiy/java
+mkdir src/info/kgeorgiy/java/advanced
+cp tests/java/info/kgeorgiy/java/advanced/concurrent src/info/kgeorgiy/java/advanced -r
+javadoc src/ru/ifmo/ctddev/gizatullin/iterativeparallelism/IterativeParallelism.java src/info/kgeorgiy/java/advanced/concurrent/ListIP.java src/info/kgeorgiy/java/advanced/concurrent/ScalarIP.java -d doc -cp tests/java:.lib/commons-compress-1.4.1.jar:tests/java/info/kgeorgiy/java/advanced/concurrent:src -private -link http://docs.oracle.com/javase/8/docs/api/
+rm -rf src/info
