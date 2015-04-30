@@ -1,4 +1,4 @@
-package ru.ifmo.ctddev.gizatullin.webcrawler;
+package ru.ifmo.ctddev.gizatullin.crawler;
 
 public class Main {
 
