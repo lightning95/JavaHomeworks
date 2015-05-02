@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.function.Predicate;
@@ -78,6 +79,9 @@ public class WebCrawler implements Crawler {
             if (args.length > 3) {
                 perHost = Integer.parseInt(args[3]);
             }
+            if (downloaders < 1 || extractors < 1 || perHost < 1) {
+                throw new NumberFormatException();
+            }
         } catch (NumberFormatException e) {
             System.err.println(e.getMessage());
             System.err.println(USAGE);
@@ -125,23 +129,30 @@ public class WebCrawler implements Crawler {
     @Override
     public List<String> download(String url, int depth) throws IOException {
         final Semaphore available = new Semaphore(TASKS_MAX_COUNT);
-        final ConcurrentLinkedQueue<Pair<String, Integer>> queue = new ConcurrentLinkedQueue<>();
+
+        final PriorityBlockingQueue<Pair<String, Integer>> queue =
+                new PriorityBlockingQueue<>(100, new Comparator<Pair<String, Integer>>() {
+                    @Override
+                    public int compare(Pair<String, Integer> o1, Pair<String, Integer> o2) {
+                        return Integer.compare(o2.getValue(), o1.getValue());
+                    }
+                });
+
         final ConcurrentMap<String, Semaphore> hostAvailable = new ConcurrentHashMap<>();
         final ConcurrentMap<String, Object> visited = new ConcurrentHashMap<>();
+        final ConcurrentMap<String, Object> postponed = new ConcurrentHashMap<>();
 
         try {
             available.acquire();
             queue.add(new Pair<>(url, depth));
-            downloadService.submit(() -> this.download(available, queue, hostAvailable, visited));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            downloadService.submit(() -> this.download(available, queue, hostAvailable, visited, postponed));
+        } catch (InterruptedException ignored) {
             return null;
         }
 
         try {
             available.acquire(TASKS_MAX_COUNT);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (InterruptedException ignored) {
         }
         return visited.keySet().stream().collect(Collectors.toList());
     }
@@ -161,8 +172,9 @@ public class WebCrawler implements Crawler {
         shutDownService(extractService, "executorService");
     }
 
-    private void download(final Semaphore available, final ConcurrentLinkedQueue<Pair<String, Integer>> queue,
-                          final ConcurrentMap<String, Semaphore> hostAvailable, final ConcurrentMap<String, Object> visited) {
+    private void download(final Semaphore available, final PriorityBlockingQueue<Pair<String, Integer>> queue,
+                          final ConcurrentMap<String, Semaphore> hostAvailable, final ConcurrentMap<String, Object> visited,
+                          final ConcurrentMap<String, Object> postponed) {
         try {
             if (!queue.isEmpty()) {
                 Pair<String, Integer> pair = queue.poll();
@@ -177,25 +189,38 @@ public class WebCrawler implements Crawler {
                                 available.acquire();
                                 visited.put(url, NOTHING);
                                 Document doc = downloader.download(url);
-                                extractService.submit(() -> extract(depth, doc, visited, available, hostAvailable, queue));
-                            } catch (InterruptedException | IOException e) {
-                                e.printStackTrace();
+                                extractService.submit(() ->
+                                        extract(depth, doc, visited, available, hostAvailable, queue, postponed));
+                            } catch (IOException | InterruptedException e) {
+                                System.err.println("Document can't be downloaded " + url);
                             } finally {
                                 hostAvailable.get(host).release();
                                 if (!queue.isEmpty()) {
                                     try {
                                         available.acquire();
-                                        downloadService.submit(() -> download(available, queue, hostAvailable, visited));
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
+                                        downloadService.submit(() ->
+                                                download(available, queue, hostAvailable, visited, postponed));
+                                    } catch (InterruptedException ignored) {
                                     }
                                 }
                             }
                         } else {
+                            // there is a problem, if the url is kept postponing due to host being busy,
+                            // so not to have the active waiting, we replace it with passive.
+                            if (postponed.containsKey(url)) {
+                                try {
+                                    hostAvailable.get(host).acquire();
+                                    postponed.remove(url);
+                                } catch (InterruptedException ignored) {
+                                } finally {
+                                    hostAvailable.get(host).release();
+                                }
+                            }
                             queue.add(pair);
+                            postponed.putIfAbsent(url, NOTHING);
                         }
                     } catch (MalformedURLException e) {
-                        e.printStackTrace();
+                        System.err.println("Host can't be defined " + url);
                     }
                 }
             }
@@ -205,7 +230,8 @@ public class WebCrawler implements Crawler {
     }
 
     private void extract(final int depth, final Document document, ConcurrentMap<String, Object> visited, final Semaphore available,
-                         final ConcurrentMap<String, Semaphore> hostAvailable, final ConcurrentLinkedQueue<Pair<String, Integer>> queue) {
+                         final ConcurrentMap<String, Semaphore> hostAvailable, final PriorityBlockingQueue<Pair<String, Integer>> queue,
+                         final ConcurrentMap<String, Object> postponed) {
         try {
             if (depth > 1) {
                 List<String> links = document.extractLinks();
@@ -213,14 +239,13 @@ public class WebCrawler implements Crawler {
                     try {
                         available.acquire();
                         queue.add(new Pair<>(url, depth - 1));
-                        downloadService.submit(() -> download(available, queue, hostAvailable, visited));
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        downloadService.submit(() -> download(available, queue, hostAvailable, visited, postponed));
+                    } catch (InterruptedException ignored) {
                     }
                 });
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Links can't be extracted " + document.toString());
         } finally {
             available.release();
         }
@@ -232,8 +257,7 @@ public class WebCrawler implements Crawler {
         if (!executorService.isShutdown()) {
             try {
                 executorService.awaitTermination(2, TimeUnit.SECONDS);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (InterruptedException ignored) {
             } finally {
                 executorService.shutdownNow();
             }
