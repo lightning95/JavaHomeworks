@@ -1,0 +1,10 @@
+rm -rf doc
+mkdir doc
+rm -rf src/info
+mkdir src/info
+mkdir src/info/kgeorgiy
+mkdir src/info/kgeorgiy/java
+mkdir src/info/kgeorgiy/java/advanced
+cp tests/java/info/kgeorgiy/java/advanced/hello src/info/kgeorgiy/java/advanced -r
+javadoc src/ru/ifmo/ctddev/gizatullin/helloudp/HelloUDPServer.java src/ru/ifmo/ctddev/gizatullin/helloudp/HelloUDPClient.java src/info/kgeorgiy/java/advanced/hello/HelloClient.java src/info/kgeorgiy/java/advanced/hello/HelloServer.java -d doc -cp tests/java:tests/java/info/kgeorgiy/java/advanced/hello:src -private -link http://docs.oracle.com/javase/8/docs/api/
+rm -rf src/info
