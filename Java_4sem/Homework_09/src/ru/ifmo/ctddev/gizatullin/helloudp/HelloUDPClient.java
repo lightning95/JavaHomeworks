@@ -25,7 +25,7 @@ import java.util.function.Predicate;
  * @see #start
  */
 public class HelloUDPClient implements HelloClient {
-    private static final String USAGE = "url/ip-address port request number_of_threads number_of_requests_per_thread";
+    private static final String USAGE = "Usage: url|ip-address port request number_of_threads number_of_requests_per_thread";
     private static final long TERMINATION_TIME_OUT = 10;
     private static final int SOCKET_TIMEOUT = 50;
 
@@ -49,8 +49,8 @@ public class HelloUDPClient implements HelloClient {
         }
         try {
             String url = args[0];
-            String request = args[2];
             int port = Integer.parseInt(args[1]);
+            String request = args[2];
             int numberOfThreads = Integer.parseInt(args[3]);
             int numberOfRequestsPerThread = Integer.parseInt(args[4]);
             if (port < 0 || port > 0xFFFF || numberOfThreads < 1 || numberOfRequestsPerThread < 1) {
@@ -110,10 +110,12 @@ public class HelloUDPClient implements HelloClient {
                                     received = new String(receivedPacket.getData(), 0, receivedPacket.getLength());
                                     System.out.println("Received = " + received);
                                 } catch (IOException ignored) {
+                                    System.err.println("Error in sending packet");
                                 }
                             }
                         }
-                    } catch (SocketException ignored) {
+                    } catch (SocketException e) {
+                        System.err.println("Socket is closed");
                     }
                 });
             }

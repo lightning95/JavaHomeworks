@@ -36,9 +36,9 @@ import java.util.function.Predicate;
  */
 public class HelloUDPServer implements HelloServer {
     private static final int BUFFER_SIZE = 1024;
-    private static final String USAGE = "Port number_of_threads";
-    private ConcurrentLinkedQueue<DatagramSocket> receivingSockets;
-    private ConcurrentLinkedQueue<ExecutorService> services;
+    private static final String USAGE = "Usage: port number_of_threads";
+    private final ConcurrentLinkedQueue<DatagramSocket> receivingSockets = new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<ExecutorService> services = new ConcurrentLinkedQueue<>();
 
     /**
      * Method to create class and execute from the command line. Usage for parameters to provide:
@@ -50,6 +50,8 @@ public class HelloUDPServer implements HelloServer {
      * @see #start
      */
     public static void main(String[] args) {
+        System.err.println(args.length);
+        Arrays.stream(args).forEach(System.err::println);
         if (args == null || args.length < 2 || Arrays.stream(args).anyMatch(Predicate.isEqual(null))) {
             System.out.println(USAGE);
             return;
@@ -85,16 +87,10 @@ public class HelloUDPServer implements HelloServer {
             System.err.println("Number of threads is non-positive");
             return;
         }
-        if (services == null) {
-            services = new ConcurrentLinkedQueue<>();
-        }
         ExecutorService service = Executors.newFixedThreadPool(threads);
         services.add(service);
         try {
             DatagramSocket receivingSocket = new DatagramSocket(port);
-            if (receivingSockets == null) {
-                receivingSockets = new ConcurrentLinkedQueue<>();
-            }
             receivingSockets.add(receivingSocket);
             for (int i = 0; i < threads; ++i) {
                 service.submit(() -> {
@@ -107,12 +103,15 @@ public class HelloUDPServer implements HelloServer {
                             sendingSocket.send(new DatagramPacket(sending.getBytes(), sending.getBytes().length,
                                     receivingPacket.getAddress(), receivingPacket.getPort()));
                         }
-                    } catch (IOException ignored) {
+                    } catch (SocketException e) {
+                        System.err.println("Socket is closed " + port);
+                    } catch (IOException e) {
+                        System.err.println("Error in sending packet");
                     }
                 });
             }
         } catch (SocketException e) {
-            System.err.println("Socket is misbehaving!");
+            System.err.println("Socket = " + port + "is already in use!");
         }
     }
 
@@ -123,8 +122,8 @@ public class HelloUDPServer implements HelloServer {
      * @see java.net.DatagramSocket
      */
     @Override
-    public void close() {
-        if (services != null) {
+    public synchronized void close() {
+        synchronized (services) {
             services.parallelStream().forEach(service -> {
                 service.shutdown();
                 try {
@@ -133,9 +132,11 @@ public class HelloUDPServer implements HelloServer {
                 } catch (InterruptedException ignored) {
                 }
             });
-        }
-        if (receivingSockets != null) {
-            receivingSockets.parallelStream().forEach(DatagramSocket::close);
+            services.clear();
+            synchronized (receivingSockets) {
+                receivingSockets.parallelStream().forEach(DatagramSocket::close);
+                receivingSockets.clear();
+            }
         }
     }
 }
