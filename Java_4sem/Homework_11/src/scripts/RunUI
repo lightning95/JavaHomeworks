@@ -1,3 +1,2 @@
-javac -cp src/swing src/ru/ifmo/ctddev/gizatullin/uifilecopy/UIFileCopy.java
-javac -cp src/swing src/ru/ifmo/ctddev/gizatullin/uifilecopy/CopyFiles.java
-java -cp src ru.ifmo.ctddev.gizatullin.uifilecopy.UIFileCopy $1 $2
+cd out/production/Homework_11/
+java ru/ifmo/ctddev/gizatullin/uifilecopy/UIFileCopy $1 $2

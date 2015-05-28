@@ -1,30 +1,51 @@
 package ru.ifmo.ctddev.gizatullin.uifilecopy;
 
-import swing.common.BasicAction;
-
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.function.Predicate;
 
 /**
  * @author Aydar Gizatullin a.k.a. lightning95, aydar.gizatullin@gmail.com
- *         Created on 5/12/15.
+ *         Created on 5/21/15.
  */
-public class UIFileCopy {
-    public static final String USAGE = "Usage: source destination ";
-    private CopyFiles copyFiles;
-    private static final Dimension FRAME_START_DIMENSION = new Dimension(400, 300);
-    private static final Dimension PROGRESSBAR_START_DIMENSION = new Dimension(300, 30);
-    private static final int TIMER_DELAY = 1000;
+public class UIFileCopy extends JFrame {
+    public abstract class BasicAction extends AbstractAction {
+        public BasicAction(String name, String description, int mnemonicKey, KeyStroke acceleratorKey) {
+            super(name);
+            putValue(SHORT_DESCRIPTION, description);
+            putValue(MNEMONIC_KEY, mnemonicKey);
+            putValue(ACCELERATOR_KEY, acceleratorKey);
+        }
+    }
+
+    class Transfer {
+        final JLabel elapsedTimeLabel;
+        final JLabel estimatingTimeLabel;
+        final JLabel averageSpeedLabel;
+        final JLabel currentSpeedLabel;
+        final JFrame frame;
+        final JLabel currentFileLabel;
+        final JProgressBar currentFileProgressBar;
+        final JProgressBar progressBar;
+        final JPanel panel;
+
+        Transfer(JLabel elapsedTimeLabel, JLabel estimatingTimeLabel,
+                 JLabel averageSpeedLabel, JLabel currentSpeedLabel,
+                 JLabel currentFileLabel, JProgressBar currentFileProgressBar,
+                 JProgressBar progressBar, JPanel rootPanel, JFrame frame) {
+            this.elapsedTimeLabel = elapsedTimeLabel;
+            this.estimatingTimeLabel = estimatingTimeLabel;
+            this.averageSpeedLabel = averageSpeedLabel;
+            this.currentSpeedLabel = currentSpeedLabel;
+            this.frame = frame;
+            this.currentFileLabel = currentFileLabel;
+            this.currentFileProgressBar = currentFileProgressBar;
+            this.progressBar = progressBar;
+            panel = rootPanel;
+        }
+    }
 
     public static String timeConvert(long time) {
         String res;
@@ -38,128 +59,81 @@ public class UIFileCopy {
         return res;
     }
 
-    private UIFileCopy(Path source, Path destination) {
-        JFrame frame = new JFrame("UIFileCopy");
-        frame.setJMenuBar(createMainMenu(frame));
-//
-        frame.setPreferredSize(FRAME_START_DIMENSION);
-        frame.setMinimumSize(FRAME_START_DIMENSION);
-//
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-//
-        JPanel panel = new JPanel();
-        frame.getContentPane().add(panel);
+    private JLabel elapsedTimeLabel;
+    private JLabel estimatingTimeLabel;
+    private JLabel averageSpeedLabel;
+    private JLabel currentSpeedLabel;
+    private JProgressBar progressBar;
+    private JButton cancelButton;
+    private JPanel rootPanel;
+    private JProgressBar currentFileProgressBar;
+    private JLabel currentFileLabel;
+    private JButton detailsButton;
+    private JLabel goalLabel;
+    private CopyFiles copyFiles2;
+    private boolean detailsOn;
 
-        panel.setLayout(new GridLayout(6, 1, 10, 10));
-        panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+    public UIFileCopy(Path source, Path destination) {
+        super("UI");
 
-        JLabel elapsedTimeLabel = new JLabel();
+        setContentPane(rootPanel);
+        setMinimumSize(rootPanel.getMinimumSize());
+        setLocationRelativeTo(null);
+
+        goalLabel.setText("<html><b>From:</b> " + source + "<br><b>To:</b> " + destination + "</html>");
         elapsedTimeLabel.setText("Elapsed time: 0 minutes");
-
-        JLabel estimatingTimeLabel = new JLabel();
         estimatingTimeLabel.setText("Estimating time: computing...");
-
-        JLabel averageSpeedLabel = new JLabel();
         averageSpeedLabel.setText("Average speed: 0 mb/s");
-
-        JLabel currentSpeedLabel = new JLabel();
         currentSpeedLabel.setText("Current speed: 0 mb/s");
+        currentFileLabel.setText("Current file: Unknown");
 
-        Action cancelAction = new BasicAction("Cancel",
-                "Cancel the operation", "/toolbarButtonGraphics/general/Help24.gif",
-                KeyEvent.VK_C, KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0)) {
+        detailsOn = false;
+        Action detailsAction = new BasicAction("Details", "Show details",
+                KeyEvent.VK_D, KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0)) {
             public void actionPerformed(ActionEvent e) {
-                copyFiles.cancel(true);
-                JOptionPane.showMessageDialog(null, "Copying is canceled");
+                currentFileLabel.setVisible(!detailsOn);
+                currentFileProgressBar.setVisible(!detailsOn);
+                currentSpeedLabel.setVisible(!detailsOn);
+                detailsOn ^= true;
             }
         };
-        JButton cancelButton = new JButton(cancelAction);
-        cancelButton.setPreferredSize(new Dimension(50, 30));
-        cancelButton.setMaximumSize(new Dimension(50, 30));
+        Action cancelAction = new BasicAction("Cancel", "Cancel the operation",
+                KeyEvent.VK_C, KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0)) {
+            public void actionPerformed(ActionEvent e) {
+                copyFiles2.cancel(true);
+                setVisible(false);
+                dispose();
+            }
+        };
+        cancelButton.setAction(cancelAction);
+        detailsButton.setAction(detailsAction);
 
-        JProgressBar progressBar = new JProgressBar(SwingConstants.HORIZONTAL);
-        progressBar.setStringPainted(true);
-        progressBar.setPreferredSize(PROGRESSBAR_START_DIMENSION);
-        progressBar.setMinimumSize(PROGRESSBAR_START_DIMENSION);
-        progressBar.setValue(0);
-        
-        panel.add(elapsedTimeLabel);
-        panel.add(estimatingTimeLabel);
-        panel.add(averageSpeedLabel);
-        panel.add(currentSpeedLabel);
-        panel.add(progressBar);
+        pack();
+        setVisible(true);
 
-        JPanel buttonPanel = new JPanel();
-//        buttonPanel.setLayout(new FlowLayout());
-        cancelButton.setMaximumSize(new Dimension(70, 30));
+        copyFiles2 = new CopyFiles(source, destination, true, true,
+                new Transfer(elapsedTimeLabel, estimatingTimeLabel, averageSpeedLabel, currentSpeedLabel,
+                        currentFileLabel, currentFileProgressBar, progressBar, rootPanel, this));
 
-        panel.add(buttonPanel.add(cancelButton));
-
-        frame.pack();
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
-
-        AtomicLong finalSize = new AtomicLong(0);
-        AtomicLong curSize = new AtomicLong(0);
-
-        long startTime = System.currentTimeMillis();
-        Timer timer = new Timer(TIMER_DELAY, e -> {
-            long cur = (System.currentTimeMillis() - startTime) / TIMER_DELAY;
-            elapsedTimeLabel.setText("Elapsed time: " + timeConvert(cur));
-        });
-
-        final long[] lasts = {0};
-
-        Timer timer2 = new Timer(TIMER_DELAY, e -> {
-            long lLastSize = lasts[0];
-            long lCurSize = curSize.get() / (1 << 20);
-
-            long ave = lCurSize / ((System.currentTimeMillis() - startTime) / TIMER_DELAY);
-            long est = Math.max(ave > 0 ? (finalSize.get() / (1 << 20) - lCurSize) / ave : 0, 0);
-            long cur = lCurSize - lLastSize == 0 ? ave : lCurSize - lLastSize;
-
-            estimatingTimeLabel.setText("Estimating time: " + timeConvert(est));
-            averageSpeedLabel.setText("Average speed: " + ave + " mb/s");
-            currentSpeedLabel.setText("Current speed: " + cur + " mb/s");
-
-            lasts[0] = lCurSize;
-        });
-
-        copyFiles = new CopyFiles(source, destination, false, true, finalSize, curSize, timer2);
-
-        copyFiles.addPropertyChangeListener(evt -> {
+        copyFiles2.addPropertyChangeListener(evt -> {
             if ("progress".equals(evt.getPropertyName())) {
                 progressBar.setValue((Integer) evt.getNewValue());
             }
         });
 
-        timer.start();
-        copyFiles.execute();
-
-        try {
-            copyFiles.get();
-        } catch (InterruptedException | ExecutionException | CancellationException ignored) {
-        }
-
-        timer.stop();
-        timer2.stop();
-
-        frame.setVisible(false);
-        frame.dispose();
+        copyFiles2.execute();
     }
 
-    private JMenuBar createMainMenu(JFrame frame) {
-        JMenuBar menu = new JMenuBar();
-        menu.add(swing.common.Toolkit.createLookAndFeelMenu(frame, KeyEvent.VK_L));
-        return menu;
-    }
+    public static final String USAGE = "Usage: <source> <destination>";
 
     public static void main(String[] args) {
         /*if (args == null || args.length != 2 || Arrays.stream(args).anyMatch(Predicate.isEqual(null))) {
             System.out.println(USAGE);
             return;
         }*/
-        args = new String[]{"/home/lightning95/Downloads/", "/home/lightning95/javatmp"};
-        new UIFileCopy(Paths.get(args[0]), Paths.get(args[1]));
+        args = new String[]{"/home/lightning95/Studings.Codes", "/home/lightning95/javatmp"};
+        final String[] finalArgs1 = args;
+        SwingUtilities.invokeLater(() -> new UIFileCopy(Paths.get(finalArgs1[0]), Paths.get(finalArgs1[1])));
+//        SwingUtilities.invokeLater(() -> new UI(Paths.get(args[0]), Paths.get(args[1])));
     }
 }
